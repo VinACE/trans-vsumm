@@ -276,7 +276,7 @@ class AONet:
 
                 seq_len = seq.shape[1]
                 # y, _ = self.model(seq,seq_len)
-                y, _ = self.model(seq,)   ## TODO  look how they are training the seq2seq model....
+                y, _ = self.model(seq,target)   ## TODO  look how they are training the seq2seq model....
                 loss_att = 0
 
                 loss = criterion(y, target)
