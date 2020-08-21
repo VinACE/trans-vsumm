@@ -21,6 +21,7 @@ import math
 import time
 from IPython.core.debugger import set_trace #set_trace()
 
+from config import  *
 
 ######## ENCODER PART #################################
 
@@ -380,8 +381,8 @@ class Seq2Seq(nn.Module):
         import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #trg = [batch size, trg len]
-        src = torch.tensor(src).to(device).long()
-        trg = torch.tensor(trg).to(device).long()
+        src = torch.tensor(src).to(self.device).long()
+        trg = torch.tensor(trg).to(self.device).long()
         src_mask = self.make_src_mask(src)
         trg_mask = self.make_trg_mask(trg)
         
