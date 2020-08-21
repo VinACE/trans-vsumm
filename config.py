@@ -6,6 +6,8 @@ __date__ = "1/12/2018"
 __license__= "MIT License"
 
 from torch.autograd import Variable
+import torch
+import torch.nn as nn
 
 
 
