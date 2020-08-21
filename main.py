@@ -218,6 +218,23 @@ class AONet:
     def train(self, output_dir='EX-0'):
 
         print("Initializing VASNet/Seq2seq model and optimizer...")
+        enc = Encoder(hps.INPUT_DIM, 
+                        hps.HID_DIM, 
+                        hps.ENC_LAYERS, 
+                        hps.ENC_HEADS, 
+                        hps.ENC_PF_DIM, 
+                        hps.ENC_DROPOUT, 
+                        hps.device)
+
+        dec = Decoder(hps.OUTPUT_DIM, 
+                        hps.HID_DIM, 
+                        hps.DEC_LAYERS, 
+                        hps.DEC_HEADS, 
+                        hps.DEC_PF_DIM, 
+                        hps.DEC_DROPOUT, 
+                        hps.device)    
+                     
+        self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         self.model.train()
 
         criterion = nn.MSELoss()
@@ -258,7 +275,8 @@ class AONet:
                     seq, target = seq.float().cuda(), target.float().cuda()
 
                 seq_len = seq.shape[1]
-                y, _ = self.model(seq,seq_len)
+                # y, _ = self.model(seq,seq_len)
+                y, _ = 
                 loss_att = 0
 
                 loss = criterion(y, target)
@@ -469,7 +487,7 @@ if __name__ == "__main__":
     print_pkg_versions()
 
     parser = argparse.ArgumentParser("PyTorch implementation of paper \"Summarizing Videos with Attention\"")
-    parser.add_argument('-r', '--root', type=str, default='/content/trans-vsumm', help="Project root directory")
+    parser.add_argument('-r', '--root', type=str, default='/content/trans-vsumm/', help="Project root directory")
     parser.add_argument('-d', '--datasets', type=str, help="Path to a comma separated list of h5 datasets")
     parser.add_argument('-s', '--splits', type=str, help="Comma separated list of split files.")
     parser.add_argument('-t', '--train', action='store_true', help="Train")
