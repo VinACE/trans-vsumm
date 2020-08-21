@@ -29,16 +29,16 @@ class HParameters:
         self.output_dir = 'ex-10'
 
         self.root = ''
-        self.datasets=['/content/VASNet/datasets/eccv16_dataset_summe_google_pool5.h5',
-                       '/content/VASNet/datasets/eccv16_dataset_tvsum_google_pool5.h5',
-                       '/content/VASNet/datasets/eccv16_dataset_ovp_google_pool5.h5',
-                       '/content/VASNet/datasets/eccv16_dataset_youtube_google_pool5.h5']
+        self.datasets=['/content/trans-vsumm/datasets/eccv16_dataset_summe_google_pool5.h5',
+                       '/content/trans-vsumm/datasets/eccv16_dataset_tvsum_google_pool5.h5',
+                       '/content/trans-vsumm/datasets/eccv16_dataset_ovp_google_pool5.h5',
+                       '/content/trans-vsumm/datasets/eccv16_dataset_youtube_google_pool5.h5']
 
-        self.splits = ['/content/VASNet/splits/tvsum_splits.json',
-                        '/content/VASNet/splits/summe_splits.json']
+        self.splits = ['/content/trans-vsumm/splits/tvsum_splits.json',
+                        '/content/trans-vsumm/splits/summe_splits.json']
 
-        self.splits += ['/content/VASNet/splits/tvsum_aug_splits.json',
-                        '/content/VASNet/splits/summe_aug_splits.json']
+        self.splits += ['/content/trans-vsumm/splits/tvsum_aug_splits.json',
+                        '/content/trans-vsumm/splits/summe_aug_splits.json']
 
 
         #### ses2seq network initialization #################################
