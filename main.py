@@ -179,7 +179,7 @@ class AONet:
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         self.model.eval()
-        # self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
+        self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
         #print(self.model)
 
         cuda_device = cuda_device or self.hps.cuda_device

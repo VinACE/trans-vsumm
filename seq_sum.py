@@ -57,7 +57,7 @@ class Encoder(nn.Module):
         import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #src_mask = [batch size, src len]
-        src = torch.tensor(src).to(self.device).long()
+        # src = torch.tensor(src).to(self.device).long()
         
         batch_size = src.shape[0]
         src_len = src.shape[1]
