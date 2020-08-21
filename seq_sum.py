@@ -1,4 +1,5 @@
 """
+# https://github.com/bentrevett/pytorch-seq2seq
 # https://github.com/bentrevett/pytorch-seq2seq/issues/129
 # https://github.com/bentrevett/pytorch-seq2seq/blob/master/6%20-%20Attention%20is%20All%20You%20Need.ipynb
 """
@@ -67,10 +68,10 @@ class Encoder(nn.Module):
         
         #pos = [batch size, src len]
         
-        src = self.dropout((self.tok_embedding(src) * self.scale) # +  self.pos_embedding(pos))  TODO check the postiontioanl encodings..
+        src = self.dropout((self.tok_embedding(src) * self.scale)) # +  self.pos_embedding(pos))  TODO check the postiontioanl encodings..
         
         #src = [batch size, src len, hid dim]
-        
+
         for layer in self.layers:                    
             src = layer(src, src_mask)
             
@@ -262,7 +263,7 @@ class Decoder(nn.Module):
                             
         #pos = [batch size, trg len]
             
-        trg = self.dropout((self.tok_embedding(trg) * self.scale) # + self.pos_embedding(pos)) TODO to check the positional encodings..
+        trg = self.dropout((self.tok_embedding(trg) * self.scale)) # + self.pos_embedding(pos)) TODO to check the positional encodings..
                 
         #trg = [batch size, trg len, hid dim]
         
