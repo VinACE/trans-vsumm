@@ -52,7 +52,7 @@ class Encoder(nn.Module):
         self.dropout = nn.Dropout(dropout)
         
         self.scale = torch.sqrt(torch.FloatTensor([hid_dim])).to(device)
-        
+
         
     def forward(self, src, src_mask):
         import pdb;pdb.set_trace()
@@ -67,7 +67,7 @@ class Encoder(nn.Module):
         
         #pos = [batch size, src len]
         
-        src = self.dropout((self.tok_embedding(src) * self.scale) + self.pos_embedding(pos))
+        src = self.dropout((self.tok_embedding(src) * self.scale) # +  self.pos_embedding(pos)) # TODO check the postiontioanl encodings..
         
         #src = [batch size, src len, hid dim]
         
@@ -262,7 +262,7 @@ class Decoder(nn.Module):
                             
         #pos = [batch size, trg len]
             
-        trg = self.dropout((self.tok_embedding(trg) * self.scale) + self.pos_embedding(pos))
+        trg = self.dropout((self.tok_embedding(trg) * self.scale) # + self.pos_embedding(pos)) # TODO to check the positional encodings..
                 
         #trg = [batch size, trg len, hid dim]
         
