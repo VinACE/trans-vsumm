@@ -38,7 +38,7 @@ class Encoder(nn.Module):
         super().__init__()
 
         self.device = device
-        
+        import pdb;pdb.set_trace()
         self.tok_embedding = nn.Embedding(input_dim, hid_dim)
         self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
