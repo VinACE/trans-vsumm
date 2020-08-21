@@ -377,9 +377,11 @@ class Seq2Seq(nn.Module):
         return trg_mask
 
     def forward(self, src, trg):
-        
+        import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #trg = [batch size, trg len]
+        src = torch.tensor(src).to(device).long()
+        trg = torch.tensor(trg).to(device).long()
         src_mask = self.make_src_mask(src)
         trg_mask = self.make_trg_mask(trg)
         
