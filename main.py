@@ -159,43 +159,25 @@ class AONet:
         np.random.seed(rnd_seed)
         torch.manual_seed(rnd_seed)
 
-        #### ses2seq network initialization #################################
-
-        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        INPUT_DIM = 1024
-        OUTPUT_DIM = 1024
-        HID_DIM = 256
-        ENC_LAYERS = 3
-        DEC_LAYERS = 3
-        ENC_HEADS = 8
-        DEC_HEADS = 8
-        ENC_PF_DIM = 512
-        DEC_PF_DIM = 512
-        ENC_DROPOUT = 0.1
-        DEC_DROPOUT = 0.1
-
-        SRC_PAD_IDX = 0
-        TRG_PAD_IDX = 0
-
-        enc = Encoder(INPUT_DIM, 
-                    HID_DIM, 
-                    ENC_LAYERS, 
-                    ENC_HEADS, 
-                    ENC_PF_DIM, 
-                    ENC_DROPOUT, 
-                    device)
-
-        dec = Decoder(OUTPUT_DIM, 
-                    HID_DIM, 
-                    DEC_LAYERS, 
-                    DEC_HEADS, 
-                    DEC_PF_DIM, 
-                    DEC_DROPOUT, 
-                    device)
-
-        #############################
         # self.model = VASNet()
-        self.model = Seq2Seq()
+
+        enc = Encoder(hps.INPUT_DIM, 
+                        hps.HID_DIM, 
+                        hps.ENC_LAYERS, 
+                        hps.ENC_HEADS, 
+                        hps.ENC_PF_DIM, 
+                        hps.ENC_DROPOUT, 
+                        hps.device)
+
+        dec = Decoder(hps.OUTPUT_DIM, 
+                        hps.HID_DIM, 
+                        hps.DEC_LAYERS, 
+                        hps.DEC_HEADS, 
+                        hps.DEC_PF_DIM, 
+                        hps.DEC_DROPOUT, 
+                        hps.device)    
+                     
+        self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         self.model.eval()
         # self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
         #print(self.model)

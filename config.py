@@ -8,6 +8,7 @@ __license__= "MIT License"
 from torch.autograd import Variable
 
 
+
 class HParameters:
 
     def __init__(self):
@@ -36,6 +37,26 @@ class HParameters:
 
         self.splits += ['/content/VASNet/splits/tvsum_aug_splits.json',
                         '/content/VASNet/splits/summe_aug_splits.json']
+
+
+        #### ses2seq network initialization #################################
+
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.INPUT_DIM = 1024
+        self.OUTPUT_DIM = 1024
+        self.HID_DIM = 256
+        self.ENC_LAYERS = 3
+        self.DEC_LAYERS = 3
+        self.ENC_HEADS = 8
+        self.DEC_HEADS = 8
+        self.ENC_PF_DIM = 512
+        self.DEC_PF_DIM = 512
+        self.ENC_DROPOUT = 0.1
+        self.DEC_DROPOUT = 0.1
+
+        self.SRC_PAD_IDX = 0
+        self.TRG_PAD_IDX = 0
+
 
         return
 
