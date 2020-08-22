@@ -176,10 +176,10 @@ class AONet:
                         hps.DEC_PF_DIM, 
                         hps.DEC_DROPOUT, 
                         hps.device)    
-                     
+        opt.gpus = [0, 1]             
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
-        self.model = nn.DataParallel(self.model)
+        self.model = nn.DataParallel(self.model, device_ids=opt.gpus, dim=0)
 
         self.model.to(hps.device)
         self.model.eval()
@@ -240,7 +240,8 @@ class AONet:
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
-        self.model = nn.DataParallel(self.model)
+        opt.gpus = [0, 1]
+        self.model = nn.DataParallel(self.model, device_ids=opt.gpus, dim=0)
         self.model.to(hps.device)
         self.model.train()
 
