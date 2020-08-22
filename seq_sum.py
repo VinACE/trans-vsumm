@@ -157,10 +157,12 @@ class MultiHeadAttentionLayer(nn.Module):
         #Q = [batch size, query len, hid dim]++
         #K = [batch size, key len, hid dim]
         #V = [batch size, value len, hid dim]
+
+        # TODO  pass through the variable and understand the size
                 
-        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
         
         # # # TODO Remove the .permute in Encoder forward function.
         # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
