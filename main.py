@@ -178,7 +178,7 @@ class AONet:
                         hps.device)    
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
-        torch.cuda.clear_memory_allocated()
+        torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model)
 
         self.model.to(hps.device)
@@ -239,7 +239,7 @@ class AONet:
                         hps.device)    
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
-        torch.cuda.clear_memory_allocated()
+        torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model)
         self.model.to(hps.device)
         self.model.train()
