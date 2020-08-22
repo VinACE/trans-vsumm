@@ -61,7 +61,8 @@ class Encoder(nn.Module):
         #src_mask = [batch size, src len]
         src = torch.tensor(src).to(self.device).long()
         
-        batch_size = src.shape[0]
+        # batch_size = src.shape[0]
+        batch_size = hps.train_batch_size
         src_len = src.shape[1]
         
         pos = torch.arange(0, src_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
