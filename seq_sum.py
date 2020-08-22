@@ -139,8 +139,8 @@ class MultiHeadAttentionLayer(nn.Module):
 
 
         self.fc_q = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False)
-        self.fc_k = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False))
-        self.fc_v = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False))
+        self.fc_k = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False)
+        self.fc_v = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False)
                
 
 
