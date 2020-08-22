@@ -178,6 +178,8 @@ class AONet:
                         hps.device)    
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
+        self.model = nn.DataParallel(self.model)
+
         self.model.to(hps.device)
         self.model.eval()
         self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
@@ -236,6 +238,7 @@ class AONet:
                         hps.device)    
                      
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
+        self.model = nn.DataParallel(self.model)
         self.model.to(hps.device)
         self.model.train()
 
