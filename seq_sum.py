@@ -131,11 +131,21 @@ class MultiHeadAttentionLayer(nn.Module):
         self.n_heads = n_heads
         self.head_dim = hid_dim // n_heads
         
-        self.fc_q = nn.Linear(hid_dim, hid_dim)
-        self.fc_k = nn.Linear(hid_dim, hid_dim)
-        self.fc_v = nn.Linear(hid_dim, hid_dim)
+        # self.fc_q = nn.Linear(hid_dim, hid_dim)
+        # self.fc_k = nn.Linear(hid_dim, hid_dim)
+        # self.fc_v = nn.Linear(hid_dim, hid_dim)
+        self.m =1024
+        self.output_size = 1024
+
+
+        self.fc_q = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False)
+        self.fc_k = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False))
+        self.fc_v = nn.Linear(in_features=self.m, out_features=self.output_size, bias=False))
+               
+
+
         
-        self.fc_o = nn.Linear(hid_dim, hid_dim)
+        self.fc_o = nn.Linear(in_features=self.output_size, out_features=self.m, bias=False)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -179,7 +189,7 @@ class MultiHeadAttentionLayer(nn.Module):
         Q *= 0.06
         # energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
        
-        energy = torch.matmul(Q, K.transpose(1,0)) #  / self.scale
+        energy = torch.matmul(Q, K.transpose(1,0))  / self.scale
         # energy = torch.matmul(Q, K) / self.scale
         
         #energy = [batch size, n heads, query len, key len]
