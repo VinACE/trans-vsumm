@@ -143,7 +143,8 @@ class MultiHeadAttentionLayer(nn.Module):
         
     def forward(self, query, key, value, mask = None):
 
-        batch_size = query.shape[0]
+        # batch_size = query.shape[0]
+        batch_size = 1 
         
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
