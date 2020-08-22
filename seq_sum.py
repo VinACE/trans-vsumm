@@ -157,16 +157,18 @@ class MultiHeadAttentionLayer(nn.Module):
         #K = [batch size, key len, hid dim]
         #V = [batch size, value len, hid dim]
                 
-        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        
         # # # TODO Remove the .permute in Encoder forward function.
         # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+
+        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         
         #Q = [batch size, n heads, query len, head dim]
         #K = [batch size, n heads, key len, head dim]
