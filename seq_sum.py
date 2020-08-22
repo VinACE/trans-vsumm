@@ -39,7 +39,7 @@ class Encoder(nn.Module):
         super().__init__()
 
         self.device = device
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         self.tok_embedding = nn.Embedding(input_dim, hid_dim)
         self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
@@ -56,13 +56,13 @@ class Encoder(nn.Module):
 
         
     def forward(self, src, src_mask):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #src_mask = [batch size, src len]
         src = torch.tensor(src).to(self.device).long()
         
         # batch_size = src.shape[0]
-        batch_size = hps.train_batch_size
+        batch_size = 1
         src_len = src.shape[1]
         
         pos = torch.arange(0, src_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
@@ -153,14 +153,17 @@ class MultiHeadAttentionLayer(nn.Module):
         K = self.fc_k(key)
         V = self.fc_v(value)
         
-        #Q = [batch size, query len, hid dim]
+        #Q = [batch size, query len, hid dim]++
         #K = [batch size, key len, hid dim]
         #V = [batch size, value len, hid dim]
                 
-        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
-        
+        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
+        # TODO Remove the .permute in Encoder forward function.
+        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim)
+        K = K.view(batch_size, -1, self.n_heads, self.head_dim)
+        V = V.view(batch_size, -1, self.n_heads, self.head_dim)
         #Q = [batch size, n heads, query len, head dim]
         #K = [batch size, n heads, key len, head dim]
         #V = [batch size, n heads, value len, head dim]
@@ -382,7 +385,7 @@ class Seq2Seq(nn.Module):
         return trg_mask
 
     def forward(self, src, trg):
-        import pdb;pdb.set_trace()
+        # import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #trg = [batch size, trg len]
         src = torch.tensor(src).to(self.device).long()
