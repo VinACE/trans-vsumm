@@ -169,9 +169,9 @@ class MultiHeadAttentionLayer(nn.Module):
         # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
 
-        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim)
+        K = K.view(batch_size, -1, self.n_heads, self.head_dim)
+        V = V.view(batch_size, -1, self.n_heads, self.head_dim)
         
         #Q = [batch size, n heads, query len, head dim]
         #K = [batch size, n heads, key len, head dim]
