@@ -269,6 +269,7 @@ class AONet:
             random.shuffle(train_keys)
 
             for i, key in enumerate(train_keys):
+                import pdb;pdb.set_trace()
                 dataset = self.get_data(key)
                 seq = dataset['features'][...]
                 seq = torch.from_numpy(seq).unsqueeze(0)
@@ -284,7 +285,7 @@ class AONet:
 
                 seq_len = seq.shape[1]
                 # y, _ = self.model(seq,seq_len)
-                y, _ = self.model(seq, seq_len)   ## TODO  look how they are training the seq2seq model....
+                y, _ = self.model(seq,target)   ## TODO  look how they are training the seq2seq model....
                 loss_att = 0
 
                 loss = criterion(y, target)
