@@ -81,6 +81,7 @@ class Encoder(nn.Module):
         return src
 
 class EncoderLayer(nn.Module):
+    import pdb;pdb.set_trace()
     def __init__(self, 
                  hid_dim, 
                  n_heads, 
@@ -180,9 +181,9 @@ class MultiHeadAttentionLayer(nn.Module):
         # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
 
-        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim)
-        K = K.view(batch_size, -1, self.n_heads, self.head_dim)
-        V = V.view(batch_size, -1, self.n_heads, self.head_dim)
+        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim)
+        # K = K.view(batch_size, -1, self.n_heads, self.head_dim)
+        # V = V.view(batch_size, -1, self.n_heads, self.head_dim)
         
         #Q = [batch size, n heads, query len, head dim]
         #K = [batch size, n heads, key len, head dim]
