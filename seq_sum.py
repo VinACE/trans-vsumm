@@ -391,7 +391,7 @@ class Seq2Seq(nn.Module):
     def make_trg_mask(self, trg):
         
         #trg = [batch size, trg len]
-        
+        import pdb;pdb.set_trace
         trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
         
         #trg_pad_mask = [batch size, 1, 1, trg len]
