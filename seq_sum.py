@@ -124,7 +124,7 @@ class EncoderLayer(nn.Module):
 class MultiHeadAttentionLayer(nn.Module):
     def __init__(self, hid_dim, n_heads, dropout, device):
         super().__init__()
-        
+        import pdb;pdb.set_trace
         assert hid_dim % n_heads == 0
         
         self.hid_dim = hid_dim
@@ -156,6 +156,7 @@ class MultiHeadAttentionLayer(nn.Module):
         # batch_size = query.shape[0]
         batch_size = 1 
         
+        import pdb;pdb.set_trace
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
         #value = [batch size, value len, hid dim]
