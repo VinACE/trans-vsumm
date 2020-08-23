@@ -281,12 +281,24 @@ class AONet:
                 target -= target.min()
                 target /= target.max()
 
+                # TODO for now making the src and target as same
+
+                
+
                 if self.hps.use_cuda:
                     seq, target = seq.float().cuda(), target.float().cuda()
 
                 seq_len = seq.shape[1]
+
+                m = seq.shape[2]
+
+                seq = seq.view(-1, m)
+                trg = seq
+
                 # y, _ = self.model(seq,seq_len)
-                y, _ = self.model(seq,target)   ## TODO  look how they are training the seq2seq model....
+
+                # TODO: normalize the target frame features. according to the scores..
+                y, _ = self.model(seq,trg)   ## TODO  look how they are training the seq2seq model....
                 loss_att = 0
 
                 loss = criterion(y, target)
