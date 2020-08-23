@@ -51,8 +51,8 @@ class HParameters:
         self.DEC_LAYERS = 1 # TODO Changedd the Decoder layer from 3 to 1
         self.ENC_HEADS = 8
         self.DEC_HEADS = 8
-        self.ENC_PF_DIM = 256 # 512
-        self.DEC_PF_DIM = 256 # 512
+        self.ENC_PF_DIM =  512
+        self.DEC_PF_DIM =  512
         self.ENC_DROPOUT = 0.1
         self.DEC_DROPOUT = 0.1
 
