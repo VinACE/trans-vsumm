@@ -56,7 +56,7 @@ class Encoder(nn.Module):
 
         
     def forward(self, src, src_mask):
-        # import pdb;pdb.set_trace()
+        import pdb;pdb.set_trace()
         #src = [batch size, src len]
         #src_mask = [batch size, src len]
         src = torch.tensor(src).to(self.device).long()
