@@ -158,6 +158,7 @@ class MultiHeadAttentionLayer(nn.Module):
         batch_size = 1 
         
         import pdb;pdb.set_trace
+        print("Print Q, K, V")
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
         #value = [batch size, value len, hid dim]
