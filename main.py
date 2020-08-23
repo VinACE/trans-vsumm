@@ -270,6 +270,7 @@ class AONet:
 
             for i, key in enumerate(train_keys):
                 import pdb;pdb.set_trace()
+                print("Entering data set featuresections")
                 dataset = self.get_data(key)
                 seq = dataset['features'][...]
                 seq = torch.from_numpy(seq).unsqueeze(0)
