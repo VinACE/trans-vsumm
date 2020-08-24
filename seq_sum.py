@@ -164,7 +164,7 @@ class MultiHeadAttentionLayer(nn.Module):
         batch_size = 1 
         
         import pdb;pdb.set_trace
-        print("Print Q, K, V")
+        # print("Print Q, K, V")
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
         #value = [batch size, value len, hid dim]
@@ -326,9 +326,13 @@ class DecoderLayer(nn.Module):
                  device):
         super().__init__()
         
-        self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
-        self.enc_attn_layer_norm = nn.LayerNorm(hid_dim)
-        self.ff_layer_norm = nn.LayerNorm(hid_dim)
+        # self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
+        # self.enc_attn_layer_norm = nn.LayerNorm(hid_dim)
+        # self.ff_layer_norm = nn.LayerNorm(hid_dim)
+        self.m = 1024
+        self.self_attn_layer_norm = nn.LayerNorm(self.m )
+        self.enc_attn_layer_norm = nn.LayerNorm(self.m )
+        self.ff_layer_norm = nn.LayerNorm(self.m )
         self.self_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
         self.encoder_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
         # self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
@@ -396,7 +400,7 @@ class Seq2Seq(nn.Module):
         return src_mask
     
     def make_trg_mask(self, trg):
-        import pdb;pdb.set_trace()
+        
         
         #trg = [batch size, trg len]
         import pdb;pdb.set_trace
