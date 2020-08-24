@@ -98,7 +98,14 @@ class EncoderLayer(nn.Module):
         print("Entering Encoder Layer forward part")
         #src = [batch size, src len, hid dim]
         #src_mask = [batch size, src len]
-                
+        
+               
+        print("********************************************")
+        print(src.shape)
+        print("********************************************")
+        print(src_mask.shape)
+        print("********************************************")
+
         #self attention
         _src, _ = self.self_attention(src, src, src, src_mask)
         
