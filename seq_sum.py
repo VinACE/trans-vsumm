@@ -380,6 +380,7 @@ class Seq2Seq(nn.Module):
         self.device = device
         
     def make_src_mask(self, src):
+        import pdb;pdb.set_trace()
         #src = [batch size, src len]
         
         src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
@@ -389,6 +390,7 @@ class Seq2Seq(nn.Module):
         return src_mask
     
     def make_trg_mask(self, trg):
+        import pdb;pdb.set_trace()
         
         #trg = [batch size, trg len]
         import pdb;pdb.set_trace
