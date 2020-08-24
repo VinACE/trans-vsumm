@@ -338,8 +338,11 @@ class Seq2Seq(nn.Module):
         
     def make_src_mask(self, src):
         import pdb;pdb.set_trace()
+        print("Entering Source mask")
         # #src = [batch size, src len]
         # n = src.shape[1]
+
+        
         src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
 
         # #src_mask = [batch size, 1, 1, src len]
