@@ -146,11 +146,12 @@ class MultiHeadAttentionLayer(nn.Module):
 
 
         
-        self.fc_o = nn.Linear(in_features=self.output_size, out_features=self.m, bias=False)
+        self.fc_o = nn.Linear(in_features=self.m,out_features=self.output_size,  bias=False)
         
         self.dropout = nn.Dropout(dropout)
         
-        self.scale = torch.sqrt(torch.FloatTensor([self.head_dim])).to(device)
+        # self.scale = torch.sqrt(torch.FloatTensor([self.head_dim])).to(device)
+        self.scale = torch.sqrt(torch.FloatTensor([self.m])).to(device)
         
     def forward(self, query, key, value, mask = None):
 
