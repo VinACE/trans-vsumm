@@ -88,6 +88,8 @@ class EncoderLayer(nn.Module):
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, src, src_mask):
+
+        import pdb;pdb.set_trace
         
         #src = [batch size, src len, hid dim]
         #src_mask = [batch size, src len]
