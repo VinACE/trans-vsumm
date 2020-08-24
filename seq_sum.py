@@ -102,6 +102,14 @@ class EncoderLayer(nn.Module):
         #self attention
         _src, _ = self.self_attention(src, src, src, src_mask)
         
+        print("********************************************")
+        print(src.shape)
+        print("********************************************")
+        print(src_mask.shape)
+        print("********************************************")
+        print(_src.shape)
+        print("********************************************")
+
         #dropout, residual connection and layer norm
         src = self.self_attn_layer_norm(src + self.dropout(_src))
         
