@@ -69,7 +69,7 @@ class Encoder(nn.Module):
         
         #pos = [batch size, src len]
         
-        src = self.dropout((self.tok_embedding(src) * self.scale)  +  self.pos_embedding(pos)) # TODO check the postiontioanl encodings..
+        src = self.dropout((self.tok_embedding(src) * self.scale)) # +  self.pos_embedding(pos)) # TODO check the postiontioanl encodings..
         
         #src = [batch size, src len, hid dim]
 
@@ -93,9 +93,9 @@ class EncoderLayer(nn.Module):
         self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
         self.ff_layer_norm = nn.LayerNorm(hid_dim)
         self.self_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
-        self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
-                                                                     pf_dim, 
-                                                                     dropout)
+        # # self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
+        #                                                              pf_dim, 
+        #                                                              dropout)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, src, src_mask):
@@ -292,7 +292,7 @@ class Decoder(nn.Module):
                             
         #pos = [batch size, trg len]
             
-        trg = self.dropout((self.tok_embedding(trg) * self.scale)  + self.pos_embedding(pos)) # TODO to check the positional encodings..
+        trg = self.dropout((self.tok_embedding(trg) * self.scale))  # + self.pos_embedding(pos)) # TODO to check the positional encodings..
                 
         #trg = [batch size, trg len, hid dim]
         
@@ -325,9 +325,9 @@ class DecoderLayer(nn.Module):
         self.ff_layer_norm = nn.LayerNorm(hid_dim)
         self.self_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
         self.encoder_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
-        self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
-                                                                     pf_dim, 
-                                                                     dropout)
+        # self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
+        #                                                              pf_dim, 
+        #                                                              dropout)
         self.dropout = nn.Dropout(dropout)
         
     def forward(self, trg, enc_src, trg_mask, src_mask):
