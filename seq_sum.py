@@ -406,7 +406,7 @@ class Seq2Seq(nn.Module):
 
         onesmask = torch.ones(n, n)
         src_mask = torch.tril(onesmask, -self.apperture) + torch.triu(onesmask, self.apperture)
-        src_mask.unsqueeze(1)
+        src_mask = src_mask.unsqueeze(1)
         return src_mask
     
     def make_trg_mask(self, trg):
