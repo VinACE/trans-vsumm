@@ -32,7 +32,7 @@ def weights_init(m):
 
 def parse_splits_filename(splits_filename):
     # Parse split file and count number of k_folds
-    import pdb;pdb.set_trace
+    # import pdb;pdb.set_trace
     spath, sfname = os.path.split(splits_filename)
     sfname, _ = os.path.splitext(sfname)
     dataset_name = sfname.split('_')[0]  # Get dataset name e.g. tvsum
@@ -269,8 +269,8 @@ class AONet:
             random.shuffle(train_keys)
 
             for i, key in enumerate(train_keys):
-                import pdb;pdb.set_trace()
-                print("Entering data set featuresections")
+                # import pdb;pdb.set_trace()
+                # print("Entering data set featuresections")
                 dataset = self.get_data(key)
                 seq = dataset['features'][...]
                 seq = torch.from_numpy(seq).unsqueeze(0)
