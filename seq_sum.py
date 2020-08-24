@@ -175,6 +175,8 @@ class MultiHeadAttentionLayer(nn.Module):
         Q = self.fc_q(query)
         K = self.fc_k(key)
         V = self.fc_v(value)
+
+        print("Finished Q")
         
         #Q = [batch size, query len, hid dim]++
         #K = [batch size, key len, hid dim]
