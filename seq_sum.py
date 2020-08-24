@@ -402,11 +402,11 @@ class Seq2Seq(nn.Module):
         # src_mask = (src != self.src_pad_idx).unsqueeze(1).unsqueeze(2)
 
         # #src_mask = [batch size, 1, 1, src len]
-        self.apperture = 0.5
+        self.apperture = 2  # 1 -2 = 1 # TODO Need to understand the mask values better..
 
         onesmask = torch.ones(n, n)
         src_mask = torch.tril(onesmask, -self.apperture) + torch.triu(onesmask, self.apperture)
-        
+
         return src_mask
     
     def make_trg_mask(self, trg):
