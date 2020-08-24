@@ -158,7 +158,9 @@ class MultiHeadAttentionLayer(nn.Module):
         #K = [batch size, n heads, key len, head dim]
         #V = [batch size, n heads, value len, head dim]
                 
-        energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
+        # energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
+        energy = torch.matmul(Q, K.transpose(1,0)) / self.scale
+
         
         #energy = [batch size, n heads, query len, key len]
         
@@ -219,7 +221,7 @@ class Decoder(nn.Module):
                  pf_dim, 
                  dropout, 
                  device,
-                 max_length = 100):
+                 max_length = 1024):
         super().__init__()
         
         self.device = device
