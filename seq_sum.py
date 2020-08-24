@@ -163,9 +163,10 @@ class MultiHeadAttentionLayer(nn.Module):
 
         
         #energy = [batch size, n heads, query len, key len]
-        
+        import pdb;pdb.set_trace
         if mask is not None:
-            energy = energy.masked_fill(mask == 0, -1e10)
+            # energy = energy.masked_fill(mask == 0, -1e10)
+            energy =  energy.masked_fill(mask == 0, float("-1e20"))
         
         attention = torch.softmax(energy, dim = -1)
                 
