@@ -47,8 +47,8 @@ class HParameters:
         self.INPUT_DIM = 1024
         self.OUTPUT_DIM = 1024
         self.HID_DIM =  256 #1024
-        self.ENC_LAYERS = 1 # TODO Changed the Encoder layer from 3 to 1
-        self.DEC_LAYERS = 1 # TODO Changedd the Decoder layer from 3 to 1
+        self.ENC_LAYERS = 3# TODO Changed the Encoder layer from 3 to 1
+        self.DEC_LAYERS = 3 # TODO Changedd the Decoder layer from 3 to 1
         self.ENC_HEADS = 8
         self.DEC_HEADS = 8
         self.ENC_PF_DIM =  1024 # TODO Changed from 512 to 1024
