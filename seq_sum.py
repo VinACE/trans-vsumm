@@ -2,6 +2,7 @@
 # https://github.com/bentrevett/pytorch-seq2seq
 # https://github.com/bentrevett/pytorch-seq2seq/issues/129
 # https://github.com/bentrevett/pytorch-seq2seq/blob/master/6%20-%20Attention%20is%20All%20You%20Need.ipynb
+#https://bastings.github.io/annotated_encoder_decoder/   # Attention Visualization for the ploting..
 """
 import torch
 import torch.nn as nn
@@ -459,53 +460,53 @@ class Seq2Seq(nn.Module):
 if __name__ == "__main__":
     pass
 
-if __name__ == "__main__":
-    # set_trace()
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-    INPUT_DIM = 10
-    OUTPUT_DIM = 10
-    HID_DIM = 256
-    ENC_LAYERS = 3
-    DEC_LAYERS = 3
-    ENC_HEADS = 8
-    DEC_HEADS = 8
-    ENC_PF_DIM = 512
-    DEC_PF_DIM = 512
-    ENC_DROPOUT = 0.1
-    DEC_DROPOUT = 0.1
+# if __name__ == "__main__":
+#     # set_trace()
+#     # device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+#     # INPUT_DIM = 10
+#     # OUTPUT_DIM = 10
+#     # HID_DIM = 256
+#     # ENC_LAYERS = 3
+#     # DEC_LAYERS = 3
+#     # ENC_HEADS = 8
+#     # DEC_HEADS = 8
+#     # ENC_PF_DIM = 512
+#     # DEC_PF_DIM = 512
+#     # ENC_DROPOUT = 0.1
+#     # DEC_DROPOUT = 0.1
 
-    SRC_PAD_IDX = 0
-    TRG_PAD_IDX = 0
+#     # SRC_PAD_IDX = 0
+#     # TRG_PAD_IDX = 0
 
-    enc = Encoder(INPUT_DIM, 
-                HID_DIM, 
-                ENC_LAYERS, 
-                ENC_HEADS, 
-                ENC_PF_DIM, 
-                ENC_DROPOUT, 
-                device)
+#     # enc = Encoder(INPUT_DIM, 
+#     #             HID_DIM, 
+#     #             ENC_LAYERS, 
+#     #             ENC_HEADS, 
+#     #             ENC_PF_DIM, 
+#     #             ENC_DROPOUT, 
+#     #             device)
 
-    dec = Decoder(OUTPUT_DIM, 
-                HID_DIM, 
-                DEC_LAYERS, 
-                DEC_HEADS, 
-                DEC_PF_DIM, 
-                DEC_DROPOUT, 
-                device)
+#     # dec = Decoder(OUTPUT_DIM, 
+#     #             HID_DIM, 
+#     #             DEC_LAYERS, 
+#     #             DEC_HEADS, 
+#     #             DEC_PF_DIM, 
+#     #             DEC_DROPOUT, 
+#     #             device)
 
-#     src_vocab_size = 10
-#     trg_vocab_size = 10
+# #     src_vocab_size = 10
+# #     trg_vocab_size = 10
 
-#     x = torch.tensor([[1, 5, 6, 4, 3, 9, 5, 2, 0, 0], [1, 8, 7, 3, 4, 5, 6, 7, 2, 0]]).to(
-#         device, dtype=torch.int64
-#     )
-#     trg =  torch.tensor([[1, 7, 4, 3, 5, 9, 2, 0,0,0], [1, 5, 6, 2, 4, 7, 6, 2,0,0]]).to(device, dtype=torch.int64)
+# #     x = torch.tensor([[1, 5, 6, 4, 3, 9, 5, 2, 0, 0], [1, 8, 7, 3, 4, 5, 6, 7, 2, 0]]).to(
+# #         device, dtype=torch.int64
+# #     )
+# #     trg =  torch.tensor([[1, 7, 4, 3, 5, 9, 2, 0,0,0], [1, 5, 6, 2, 4, 7, 6, 2,0,0]]).to(device, dtype=torch.int64)
 
 
-#     model = Seq2Seq(enc, dec, SRC_PAD_IDX, TRG_PAD_IDX, device).to(
-#         device
-#     )
-#     out, attention = model(x, trg[:, :-1])
-#     print(out.shape)
-#     print(attention.shape)
+# #     model = Seq2Seq(enc, dec, SRC_PAD_IDX, TRG_PAD_IDX, device).to(
+# #         device
+# #     )
+# #     out, attention = model(x, trg[:, :-1])
+# #     print(out.shape)
+# #     print(attention.shape)
     
