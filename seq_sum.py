@@ -409,7 +409,7 @@ if __name__ == "__main__":
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     INPUT_DIM = 1024
     OUTPUT_DIM = 1024
-    HID_DIM = 1024
+    HID_DIM = 1024 #256
     ENC_LAYERS = 3
     DEC_LAYERS = 3
     ENC_HEADS = 8
