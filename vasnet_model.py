@@ -84,7 +84,7 @@ class VASNet(nn.Module):
         self.layer_norm_y = LayerNorm(self.m)
         self.layer_norm_ka = LayerNorm(self.ka.out_features)
 
-
+ 
     def forward(self, x, seq_len):
 
         m = x.shape[2] # Feature size

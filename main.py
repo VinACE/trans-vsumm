@@ -22,7 +22,6 @@ from vsum_tools import  *
 from vasnet_model import  *
 from seq_sum import *
 
-
 def weights_init(m):
     classname = m.__class__.__name__
     if classname == 'Linear':
