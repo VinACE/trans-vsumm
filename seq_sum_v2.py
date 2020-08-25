@@ -155,14 +155,14 @@ class MultiHeadAttentionLayer(nn.Module):
         print(hid_dim)
         
         self.fc_q = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
-        self.fc_k = nn.Linear(hid_dim, hid_dim)
-        self.fc_v = nn.Linear(hid_dim, hid_dim)
+        self.fc_k = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
+        self.fc_v = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
         
-        self.fc_o = nn.Linear(hid_dim, hid_dim)
+        self.fc_o = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
         
         self.dropout = nn.Dropout(dropout)
         
-        self.scale = torch.sqrt(torch.FloatTensor([self.head_dim])).to(device)
+        self.scale = torch.sqrt(torch.FloatTensor([self.output_size])).to(device)
         
     def forward(self, query, key, value, mask = None):
         import pdb;pdb.set_trace
