@@ -168,6 +168,8 @@ class MultiHeadAttentionLayer(nn.Module):
         import pdb;pdb.set_trace
         print("**********************************")
         print(mask.shape)
+        print("**********************************")
+        print(energy.shape)
         if mask is not None:
             energy = energy.masked_fill(mask == 0, -1e10)
         
