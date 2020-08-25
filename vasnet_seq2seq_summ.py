@@ -39,7 +39,7 @@ class Encoder(nn.Module):
         self.device = device
         
         self.tok_embedding = nn.Embedding(input_dim, hid_dim)
-        self.pos_embedding = nn.Embedding(max_length, hid_dim)
+        # self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
         self.layers = nn.ModuleList([EncoderLayer(hid_dim, 
                                                   n_heads, 
@@ -65,7 +65,7 @@ class Encoder(nn.Module):
         
         #pos = [batch size, src len]
         
-        src = self.dropout((self.tok_embedding(src) * self.scale) + self.pos_embedding(pos))
+        src = self.dropout((self.tok_embedding(src) * self.scale)) # + self.pos_embedding(pos))
         
         #src = [batch size, src len, hid dim]
         
@@ -232,7 +232,7 @@ class Decoder(nn.Module):
         self.device = device
         
         self.tok_embedding = nn.Embedding(output_dim, hid_dim)
-        self.pos_embedding = nn.Embedding(max_length, hid_dim)
+        # self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
         self.layers = nn.ModuleList([DecoderLayer(hid_dim, 
                                                   n_heads, 
@@ -262,7 +262,7 @@ class Decoder(nn.Module):
                             
         #pos = [batch size, trg len]
             
-        trg = self.dropout((self.tok_embedding(trg) * self.scale) + self.pos_embedding(pos))
+        trg = self.dropout((self.tok_embedding(trg) * self.scale)) #  + self.pos_embedding(pos))
                 
         #trg = [batch size, trg len, hid dim]
         
