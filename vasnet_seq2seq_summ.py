@@ -57,7 +57,8 @@ class Encoder(nn.Module):
         #src = [batch size, src len]
         #src_mask = [batch size, src len]
         
-        batch_size = src.shape[0]
+        # batch_size = src.shape[0]
+        batch_size = 1
         src_len = src.shape[1]
         
         pos = torch.arange(0, src_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
@@ -138,7 +139,8 @@ class MultiHeadAttentionLayer(nn.Module):
         
     def forward(self, query, key, value, mask = None):
 
-        batch_size = query.shape[0]
+        # batch_size = query.shape[0]
+        batch_size = 1
         
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
@@ -252,7 +254,8 @@ class Decoder(nn.Module):
         #trg_mask = [batch size, trg len]
         #src_mask = [batch size, src len]
                 
-        batch_size = trg.shape[0]
+        # batch_size = trg.shape[0]
+        batch_size = 1
         trg_len = trg.shape[1]
         
         pos = torch.arange(0, trg_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
