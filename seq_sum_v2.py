@@ -17,6 +17,8 @@ import math
 import time
 from IPython.core.debugger import set_trace #set_trace()
 
+from layer_norm import  *
+
 # from config import  *
 
 class Encoder(nn.Module):
@@ -93,8 +95,8 @@ class EncoderLayer(nn.Module):
         #                                                              pf_dim, 
         #                                                              dropout)
 
-        self.self_attn_layer_norm = nn.LayerNorm(self.m)
-        self.ff_layer_norm = nn.LayerNorm(self.m)
+        self.self_attn_layer_norm = LayerNorm(self.m)
+        self.ff_layer_norm = LayerNorm(self.m)
         self.self_attention = MultiHeadAttentionLayer(self.m, n_heads, dropout, device)
         self.positionwise_feedforward = PositionwiseFeedforwardLayer(self.m, 
                                                                      pf_dim, 
@@ -321,9 +323,9 @@ class DecoderLayer(nn.Module):
                  device):
         super().__init__()
         self.m = 1024 # cnn features size
-        self.self_attn_layer_norm = nn.LayerNorm(self.m)
-        self.enc_attn_layer_norm = nn.LayerNorm(self.m)
-        self.ff_layer_norm = nn.LayerNorm(self.m)
+        self.self_attn_layer_norm = LayerNorm(self.m)
+        self.enc_attn_layer_norm = LayerNorm(self.m)
+        self.ff_layer_norm = LayerNorm(self.m)
         self.self_attention = MultiHeadAttentionLayer(self.m, n_heads, dropout, device)
         self.encoder_attention = MultiHeadAttentionLayer(self.m, n_heads, dropout, device)
         self.positionwise_feedforward = PositionwiseFeedforwardLayer(self.m, 
