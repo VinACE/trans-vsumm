@@ -135,7 +135,7 @@ class EncoderLayer(nn.Module):
 class MultiHeadAttentionLayer(nn.Module):
     def __init__(self, hid_dim, n_heads, dropout, device):
         super().__init__()
-        import pdb;pdb.set_trace
+        
         assert hid_dim % n_heads == 0
         
         self.hid_dim = hid_dim
@@ -153,7 +153,6 @@ class MultiHeadAttentionLayer(nn.Module):
         self.scale = torch.sqrt(torch.FloatTensor([self.head_dim])).to(device)
         
     def forward(self, query, key, value, mask = None):
-        import pdb;pdb.set_trace
         
         batch_size = query.shape[0]
         
