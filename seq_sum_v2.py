@@ -319,7 +319,7 @@ class DecoderLayer(nn.Module):
                  dropout, 
                  device):
         super().__init__()
-        
+        self.m = 1024 # cnn features size
         self.self_attn_layer_norm = nn.LayerNorm(self.m)
         self.enc_attn_layer_norm = nn.LayerNorm(self.m)
         self.ff_layer_norm = nn.LayerNorm(self.m)
