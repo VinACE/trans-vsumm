@@ -83,11 +83,19 @@ class EncoderLayer(nn.Module):
                  dropout, 
                  device):
         super().__init__()
+        self.m = 1024 # cnn features size
         print("Entering Encoder Layer  part")
-        self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
-        self.ff_layer_norm = nn.LayerNorm(hid_dim)
-        self.self_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
-        self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
+        # self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
+        # self.ff_layer_norm = nn.LayerNorm(hid_dim)
+        # self.self_attention = MultiHeadAttentionLayer(hid_dim, n_heads, dropout, device)
+        # self.positionwise_feedforward = PositionwiseFeedforwardLayer(hid_dim, 
+        #                                                              pf_dim, 
+        #                                                              dropout)
+
+        self.self_attn_layer_norm = nn.LayerNorm(self.m)
+        self.ff_layer_norm = nn.LayerNorm(self.m)
+        self.self_attention = MultiHeadAttentionLayer(self.m, n_heads, dropout, device)
+        self.positionwise_feedforward = PositionwiseFeedforwardLayer(self.m, 
                                                                      pf_dim, 
                                                                      dropout)
         self.dropout = nn.Dropout(dropout)
