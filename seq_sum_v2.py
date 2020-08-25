@@ -147,6 +147,8 @@ class MultiHeadAttentionLayer(nn.Module):
     def __init__(self, hid_dim, n_heads, dropout, device):
         super().__init__()
         import pdb;pdb.set_trace
+
+        #  self.hid_dim as embed_size
         assert hid_dim % n_heads == 0
         
         self.hid_dim = hid_dim
@@ -156,11 +158,11 @@ class MultiHeadAttentionLayer(nn.Module):
         self.output_size = 1024
         print(hid_dim)
         
-        self.fc_q = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
-        self.fc_k = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
-        self.fc_v = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
+        self.fc_q = nn.Linear(self.head_dim, self.head_dim, bias=False)
+        self.fc_k = nn.Linear(self.head_dim, self.head_dim, bias=False)
+        self.fc_v = nn.Linear(self.head_dim, self.head_dim, bias=False)
         
-        self.fc_o = nn.Linear(hid_dim, out_features=self.output_size, bias=False)
+        self.fc_o = nn.Linear(n_heads * self.head_dim, hid_dim)
         
         self.dropout = nn.Dropout(dropout)
         
@@ -174,10 +176,19 @@ class MultiHeadAttentionLayer(nn.Module):
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
         #value = [batch size, value len, hid dim]
+
+        N = query.shape[0]
+        value_len, key_len, query_len = value.shape[1], key.shape[1], query.shape[1]
+
+        # split embedding into self. head pieces
+        values = values.reshape(N, value_len, self.heads, self.head_dim)
+        keys = keys.reshape(N, key_len, self.heads, self.head_dim)
+        queries = query.reshape(N, query_len, self.heads, self.head_dim)
+
                 
-        Q = self.fc_q(query)
-        K = self.fc_k(key)
-        V = self.fc_v(value)
+        Q = self.fc_q(queries)
+        K = self.fc_k(keys)
+        V = self.fc_v(values)
         
         #Q = [batch size, query len, hid dim]
         #K = [batch size, key len, hid dim]
@@ -187,16 +198,18 @@ class MultiHeadAttentionLayer(nn.Module):
         # K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
         # V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
 
-        Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
-        V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        # Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        # K = K.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
+        # V = V.view(batch_size, -1, self.n_heads, self.head_dim).view(-1, 1024)
         
         #Q = [batch size, n heads, query len, head dim]
         #K = [batch size, n heads, key len, head dim]
         #V = [batch size, n heads, value len, head dim]
                 
         # energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
-        energy = torch.matmul(Q, K.transpose(1,0)) / self.scale
+        # energy = torch.matmul(Q, K.transpose(1,0)) / self.scale
+
+        energy = torch.einsum("nqhd,nkhd->nhqk", [Q, K])
 
         print(f'Q shape is {Q.shape}')
         print(f'K shape is {K.shape}')
@@ -209,25 +222,34 @@ class MultiHeadAttentionLayer(nn.Module):
             # energy = energy.masked_fill(mask == 0, -1e10)
             energy =  energy.masked_fill(mask == 0, float("-1e20"))
         
-        attention = torch.softmax(energy, dim = -1)
+        attention = torch.softmax(energy / (self.hid_dim ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
+
+        x = torch.einsum("nhql,nlhd->nqhd", [attention, values]).reshape(
+            N, query_len, self.heads * self.n_heads
+        )
+        
+        print(f'x *******************Shape')
+        print(f'x output and attentionshape is {x.shape}')
+        print(f'x output and attentionshape is {attention.shape}')
+        # attention = torch.softmax(energy, dim = -1)
                 
-        #attention = [batch size, n heads, query len, key len]
+        # #attention = [batch size, n heads, query len, key len]
                 
-        x = torch.matmul(self.dropout(attention), V)
+        # x = torch.matmul(self.dropout(attention), V)
         
-        #x = [batch size, n heads, query len, head dim]
+        # #x = [batch size, n heads, query len, head dim]
         
-        x = x.permute(0, 2, 1, 3).contiguous()
+        # x = x.permute(0, 2, 1, 3).contiguous()
         
-        #x = [batch size, query len, n heads, head dim]
+        # #x = [batch size, query len, n heads, head dim]
         
-        x = x.view(batch_size, -1, self.hid_dim)
+        # x = x.view(batch_size, -1, self.hid_dim)
         
-        #x = [batch size, query len, hid dim]
+        # #x = [batch size, query len, hid dim]
         
         x = self.fc_o(x)
         
-        #x = [batch size, query len, hid dim]
+        # #x = [batch size, query len, hid dim]
         
         return x, attention
 

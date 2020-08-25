@@ -45,7 +45,7 @@ class SelfAttention(nn.Module):
         # queries shape : (N, query_len, heads, heads_dim)
         # keyshape shape : (N, key_len, heads, heads_dim)
         # energy shape : (N, heads, query_len, key_len)
-        import pdb;pdb.set_trace
+        
         if mask is not None:
             energy =  energy.masked_fill(mask == 0, float("-1e20")) # for numerical stability
         
