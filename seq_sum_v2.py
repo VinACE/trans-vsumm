@@ -159,6 +159,7 @@ class MultiHeadAttentionLayer(nn.Module):
     
     def forward(self, values, keys, query, mask):
         N = query.shape[0]
+        print(f'NNNNNNNNNNNN is {N}')
         value_len, key_len, query_len = values.shape[1], keys.shape[1], query.shape[1]
 
         # split embedding into self. head pieces
