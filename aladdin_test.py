@@ -276,5 +276,5 @@ if __name__ == "__main__":
     src_vocab_size = 10
     trg_vocab_size = 10
     model = Transformer(x, trg, src_pad_idx, trg_pad_idx).to(device)
-    out, _ = model(x, trg[:, :-1])
+    out = model(x, trg[:, :-1])
     print(out.shape)
