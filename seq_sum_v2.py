@@ -144,7 +144,7 @@ class EncoderLayer(nn.Module):
         return src
 
 class MultiHeadAttentionLayer(nn.Module):
-     def __init__(self, embed_size, heads, dropout, device): #  heads=8
+    def __init__(self, embed_size, heads, dropout, device): #  heads=8
         super(SelfAttention, self).__init__()
         self.embed_size = embed_size
         self.heads = heads
