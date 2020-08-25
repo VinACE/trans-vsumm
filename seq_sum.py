@@ -187,7 +187,11 @@ class MultiHeadAttentionLayer(nn.Module):
         # energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
         energy = torch.matmul(Q, K.transpose(1,0)) / self.scale
 
-        
+        print(f'Q shape is {Q.shape}')
+        print(f'K shape is {k.shape}')
+        print(f'V shape is {V.shape}')
+
+        print(f'Energy shape is {energy.shape}')
         #energy = [batch size, n heads, query len, key len]
         import pdb;pdb.set_trace
         if mask is not None:
