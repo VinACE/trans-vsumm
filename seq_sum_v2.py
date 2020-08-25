@@ -145,7 +145,7 @@ class EncoderLayer(nn.Module):
 
 class MultiHeadAttentionLayer(nn.Module):
     def __init__(self, embed_size, heads, dropout, device): #  heads=8
-        super(SelfAttention, self).__init__()
+        super(MultiHeadAttentionLayer, self).__init__()
         self.embed_size = embed_size
         self.heads = heads
         self.head_dim = embed_size // heads
@@ -202,9 +202,9 @@ class MultiHeadAttentionLayer(nn.Module):
         # # value_heads = values.view(batch_size, value_len, self.heads, self.head_dim).transpose(1, 2)  # (batch_size, heads_count, value_len, d_head)
 
         # attention_weights = self.scaled_dot_product(query_heads, key_heads)  # (batch_size, heads_count, query_len, key_len)
-        out = self.fc_out(out)
+        x = self.fc_out(out)
 
-        return out
+        
         
         return x, attention
 
