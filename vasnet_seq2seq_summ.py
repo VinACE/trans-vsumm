@@ -165,7 +165,7 @@ class MultiHeadAttentionLayer(nn.Module):
         energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
         
         #energy = [batch size, n heads, query len, key len]
-        
+        import pdb;pdb.set_trace
         if mask is not None:
             energy = energy.masked_fill(mask == 0, -1e10)
         
@@ -422,8 +422,8 @@ class Seq2Seq(nn.Module):
 # INPUT_DIM = len(SRC.vocab)
 # OUTPUT_DIM = len(TRG.vocab)
 
-if __name__ == "__main__":
-    pass
+# if __name__ == "__main__":
+#     pass
 
 if __name__ == "__main__":
     # set_trace()
