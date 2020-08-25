@@ -84,6 +84,7 @@ class EncoderLayer(nn.Module):
                  device):
         super().__init__()
         self.m = 1024 # cnn features size
+        import pdb;pdb.set_trace
         print("Entering Encoder Layer  part")
         # self.self_attn_layer_norm = nn.LayerNorm(hid_dim)
         # self.ff_layer_norm = nn.LayerNorm(hid_dim)
