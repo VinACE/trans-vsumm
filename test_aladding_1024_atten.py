@@ -71,9 +71,9 @@ class TransformerBlock(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, value, key, query, mask):
-        _, attention = self.attention(value, key, query, mask)
+        _src, attention = self.attention(value, key, query, mask)
 
-        x = self.dropout(self.norm1(attention)) # + query))
+        x = self.dropout(self.norm1(_src + query))
         forward = self.feed_forward(x)
         out = self.dropout(self.norm2(forward + x))
         return out, attention
@@ -131,8 +131,8 @@ class DecoderBlock(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, value, key, src_mask, trg_mask):  # x  & V & K are comming in from the encoder..
-        attention = self.attention(x, x, x, trg_mask)  # ENC (n x m) => (n x H)
-        query = self.dropout(self.norm(attention + x))
+        _src, attention = self.attention(x, x, x, trg_mask)  # ENC (n x m) => (n x H)
+        query = self.dropout(self.norm(_src + x))
         out = self.transformer_block(value, key, query, src_mask)
         return out, attention
 
