@@ -71,6 +71,7 @@ class TransformerBlock(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, value, key, query, mask):
+        import pdb;pdb.set_trace
         _src, attention = self.attention(value, key, query, mask)
 
         x = self.dropout(self.norm1(_src + query))
