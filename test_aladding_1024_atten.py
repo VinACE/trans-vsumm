@@ -119,8 +119,8 @@ class Encoder(nn.Module):
         for layers in self.layers:
             out = layers(out, out, out, mask)
         
-        return out  # should we return the weights in Encoder.. or is it ok only to return on the Decoder part...
-    
+        return out  
+        
 class DecoderBlock(nn.Module):
     def __init__(self, embed_size, heads, forward_expansion, dropout, device):
         super(DecoderBlock, self).__init__()
