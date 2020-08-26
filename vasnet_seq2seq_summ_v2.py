@@ -173,9 +173,9 @@ class MultiHeadAttentionLayer(nn.Module):
         #energy = [batch size, n heads, query len, key len]
         import pdb;pdb.set_trace
         print("**********************************")
-        print(mask.shape)
+        print(f' Shape of mask is {mask.shape}')
         print("**********************************")
-        print(energy.shape)
+        print(f' Shape of Energy is {energy.shape}')
         if mask is not None:
             energy = energy.masked_fill(mask == 0, -1e10)
         
