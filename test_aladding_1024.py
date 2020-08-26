@@ -258,5 +258,5 @@ if __name__ == "__main__":
         device
     )
     # out = model(x, trg[:, :-1])
-    # out = model(x, trg[:, :])
+    out = model(x, trg[:, :])
     print(out.shape)
