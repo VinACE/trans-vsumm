@@ -53,7 +53,7 @@ class SelfAttention(nn.Module):
 
         out = self.fc_out(out)
 
-        return out, attention
+        return out
 
 
 class TransformerBlock(nn.Module):
