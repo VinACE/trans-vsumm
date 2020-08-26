@@ -72,7 +72,7 @@ class TransformerBlock(nn.Module):
 
     def forward(self, value, key, query, mask):
         import pdb;pdb.set_trace
-        print(f' TYPEEEEEE of v,k,q  {type(v)}, {type(k)},{type(q)}')
+        print(f' TYPEEEEEE of v,k,q  {type(value)}, {type(key)},{type(query)}')
         _src, attention = self.attention(value, key, query, mask)
 
         x = self.dropout(self.norm1(_src + query))
