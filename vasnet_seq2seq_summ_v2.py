@@ -487,6 +487,6 @@ if __name__ == "__main__":
     model = Seq2Seq(enc, dec, SRC_PAD_IDX, TRG_PAD_IDX, device).to(
         device
     )
-    out, attention = model(x, trg[:, :-1])
+    out, attention = model(x, trg[:, :])
     print(out.shape)
     print(attention.shape)
