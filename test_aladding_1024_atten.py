@@ -233,8 +233,8 @@ class Transformer(nn.Module):
         src_mask = self.make_src_mask(src)
         trg_mask = self.make_trg_mask(trg)
         enc_src = self.encoder(src, src_mask)
-        out = self.decoder(trg, enc_src, src_mask, trg_mask)
-        return out
+        out, attention = self.decoder(trg, enc_src, src_mask, trg_mask)
+        return out, attention
     
 if __name__ == "__main__":
     # import pdb;pdb.set_trace()
