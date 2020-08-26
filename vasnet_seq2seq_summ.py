@@ -166,7 +166,7 @@ class MultiHeadAttentionLayer(nn.Module):
         
         print(f' Shape of Q is {Q.shape}')
         print("**********************************")
-        print(f' Shape of Q is {K.shape}')
+        print(f' Shape of K is {K.shape}')
                 
         energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
         
@@ -445,8 +445,8 @@ if __name__ == "__main__":
     DEC_LAYERS = 3
     ENC_HEADS = 8
     DEC_HEADS = 8
-    ENC_PF_DIM = 512
-    DEC_PF_DIM = 512
+    ENC_PF_DIM = 256 # 512
+    DEC_PF_DIM = 256 # 512
     ENC_DROPOUT = 0.1
     DEC_DROPOUT = 0.1
 
