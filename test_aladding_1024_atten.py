@@ -53,7 +53,7 @@ class SelfAttention(nn.Module):
 
         out = self.fc_out(out)
 
-        return out
+        return out, attention
 
 
 class TransformerBlock(nn.Module):
@@ -76,7 +76,7 @@ class TransformerBlock(nn.Module):
         x = self.dropout(self.norm1(attention + query))
         forward = self.feed_forward(x)
         out = self.dropout(self.norm2(forward + x))
-        return out
+        return out, attention
 
 class Encoder(nn.Module):
     def __init__(
@@ -134,7 +134,7 @@ class DecoderBlock(nn.Module):
         attention = self.attention(x, x, x, trg_mask)  # ENC (n x m) => (n x H)
         query = self.dropout(self.norm(attention + x))
         out = self.transformer_block(value, key, query, src_mask)
-        return out
+        return out, attention
 
     
 class Decoder(nn.Module):
@@ -168,11 +168,11 @@ class Decoder(nn.Module):
         x = self.dropout((self.word_embedding(x) + self.position_embedding(positions)))
 
         for layer in self.layers:
-            x = layer(x, enc_out, enc_out, src_mask, trg_mask)
+            x, attention= layer(x, enc_out, enc_out, src_mask, trg_mask)
 
         out = self.fc_out(x)
 
-        return out
+        return out, attention
 
 class Transformer(nn.Module):
     def __init__(
