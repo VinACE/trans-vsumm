@@ -118,7 +118,7 @@ class EncoderLayer(nn.Module):
 ####        ATTENTION LAYER  #################################################################
 
 class MultiHeadAttentionLayer(nn.Module):
-    def __init__(self, hid_dim, n_heads, dropout, device):  
+    def __init__(self, hid_dim, n_heads, dropout, device):
         super().__init__()
         
         assert hid_dim % n_heads == 0
@@ -140,8 +140,6 @@ class MultiHeadAttentionLayer(nn.Module):
     def forward(self, query, key, value, mask = None):
 
         batch_size = query.shape[0]
-        N = query.shape[0]
-        value_len, key_len, query_len = value.shape[1], key.shape[1], query.shape[1]
         # batch_size = 1
         
         #query = [batch size, query len, hid dim]
@@ -155,7 +153,7 @@ class MultiHeadAttentionLayer(nn.Module):
         #Q = [batch size, query len, hid dim]
         #K = [batch size, key len, hid dim]
         #V = [batch size, value len, hid dim]
-        '''        
+                
         Q = Q.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
         K = K.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
         V = V.view(batch_size, -1, self.n_heads, self.head_dim).permute(0, 2, 1, 3)
@@ -196,25 +194,8 @@ class MultiHeadAttentionLayer(nn.Module):
         x = x.view(batch_size, -1, self.hid_dim)
         
         #x = [batch size, query len, hid dim]
-        '''
-
-
-
-        energy = torch.einsum("nqhd,nkhd->nhqk", [Q, K])
-        # queries shape : (N, query_len, heads, heads_dim)
-        # keyshape shape : (N, key_len, heads, heads_dim)
-        # energy shape : (N, heads, query_len, key_len)
-
-        if mask is not None:
-            energy =  energy.masked_fill(mask == 0, float("-1e20")) # for numerical stability
         
-        attention = torch.softmax(energy / (self.embed_size ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
-
-        out = torch.einsum("nhql,nlhd->nqhd", [attention, V]).reshape(
-            batch_size, query_len, self.n_heads * self.hid_dim
-        )
-
-        x = self.fc_o(out)
+        x = self.fc_o(x)
         
         #x = [batch size, query len, hid dim]
         
