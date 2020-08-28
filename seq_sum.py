@@ -143,14 +143,19 @@ class MultiHeadAttentionLayer(nn.Module):
         N = query.shape[0]
         value_len, key_len, query_len = value.shape[1], key.shape[1], query.shape[1]
         # batch_size = 1
+
+        # split embedding into self. head pieces
+        values = value.reshape(N, value_len, self.n_heads, self.head_dim)
+        keys = key.reshape(N, key_len, self.n_heads, self.head_dim)
+        queries = query.reshape(N, query_len, self.n_heads, self.head_dim)
         
         #query = [batch size, query len, hid dim]
         #key = [batch size, key len, hid dim]
         #value = [batch size, value len, hid dim]
                 
-        Q = self.fc_q(query)
-        K = self.fc_k(key)
-        V = self.fc_v(value)
+        Q = self.fc_q(queries)
+        K = self.fc_k(keys)
+        V = self.fc_v(values)
         
         #Q = [batch size, query len, hid dim]
         #K = [batch size, key len, hid dim]
