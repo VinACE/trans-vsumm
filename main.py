@@ -181,7 +181,7 @@ class AONet:
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
 
         # self.model.to(hps.device)
-        self.model.cuda(gpus)
+        self.model.cuda()
         self.model.eval()
         self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
         #print(self.model)
@@ -242,7 +242,9 @@ class AONet:
         torch.cuda.empty_cache()
         gpus = [0]
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
-        self.model.to(hps.device)
+        
+        # self.model.to(hps.device)
+        self.model.cuda()
         self.model.train()
 
         criterion = nn.MSELoss()
