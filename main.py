@@ -295,8 +295,8 @@ class AONet:
                 seq = seq.view(-1, m)
                 trg = seq
                 
-                if self.hps.use_cuda:                                     ## TODO Need to verify this step
-                    seq, target, trg = seq.float().cuda(), target.float().cuda() , trg.float().cuda()
+                # if self.hps.use_cuda:                                     ## TODO Need to verify this step
+                seq, target, trg = seq.float().cuda(), target.float().cuda() , trg.float().cuda()
 
 
                 # y, _ = self.model(seq,seq_len)
