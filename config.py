@@ -43,7 +43,7 @@ class HParameters:
 
         #### ses2seq network initialization #################################
 
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.INPUT_DIM = 1024
         self.OUTPUT_DIM = 1024
         self.HID_DIM =  256 #1024
