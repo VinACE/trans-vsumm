@@ -65,7 +65,7 @@ class Encoder(nn.Module):
         
         #pos = [batch size, src len]
         src = torch.tensor(src).to(self.device).long()
-        src = self.dropout((self.tok_embedding(src) * self.scale) #  + self.pos_embedding(pos))
+        src = self.dropout((self.tok_embedding(src) * self.scale)) #  + self.pos_embedding(pos))
         
         #src = [batch size, src len, hid dim]
         
