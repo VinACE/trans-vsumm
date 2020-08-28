@@ -181,7 +181,7 @@ class AONet:
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
 
         # self.model.to(hps.device)
-        self.model.cuda(0,1)
+        self.model.cuda(gpus)
         self.model.eval()
         self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
         #print(self.model)
