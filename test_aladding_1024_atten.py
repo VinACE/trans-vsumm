@@ -133,6 +133,7 @@ class DecoderBlock(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x, value, key, src_mask, trg_mask):  # x  & V & K are comming in from the encoder..
+        
         _src, attention = self.attention(x, x, x, trg_mask)  # ENC (n x m) => (n x H)
         query = self.dropout(self.norm(_src + x))
         out = self.transformer_block(value, key, query, src_mask)
