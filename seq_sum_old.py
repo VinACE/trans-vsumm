@@ -436,7 +436,7 @@ class Seq2Seq(nn.Module):
 
 if __name__ == "__main__":
     set_trace()
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     INPUT_DIM = 1024
     OUTPUT_DIM = 1024
     HID_DIM = 256 # 1024 #256
@@ -512,7 +512,7 @@ torch.Size([2, 1, 1, 1024])
 ********************************************
 Traceback (most recent call last):
   File "seq_sum.py", line 431, in <module>
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
   File "/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py", line 722, in _call_impl
     result = self.forward(*input, **kwargs)
   File "seq_sum.py", line 418, in forward
