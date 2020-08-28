@@ -175,7 +175,7 @@ class AONet:
                         hps.DEC_PF_DIM, 
                         hps.DEC_DROPOUT, 
                         hps.device)    
-        gpus = [0]             
+        gpus = [0,1]             
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
@@ -297,7 +297,9 @@ class AONet:
                 # y, _ = self.model(seq,seq_len)
 
                 # TODO: normalize the target frame features. according to the scores..
-                y, _ = self.model(seq,trg)   ## TODO  look how they are training the seq2seq model....
+                y, _ = self.model(seq, trg)   ## TODO  look how they are training the seq2seq model....
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
+                print(type(y))
                 loss_att = 0
 
                 loss = criterion(y, target)

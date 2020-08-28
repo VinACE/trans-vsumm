@@ -57,8 +57,8 @@ class Encoder(nn.Module):
         #src = [batch size, src len]
         #src_mask = [batch size, src len]
         
-        # batch_size = src.shape[0]
-        batch_size = 1
+        batch_size = src.shape[0]
+        # batch_size = 1
         src_len = src.shape[1]
         
         pos = torch.arange(0, src_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
@@ -434,6 +434,7 @@ class Seq2Seq(nn.Module):
 
 # if __name__ == "__main__":
 #     pass
+
 '''
 if __name__ == "__main__":
     # set_trace()
