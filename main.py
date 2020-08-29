@@ -277,6 +277,7 @@ class AONet:
                 # print("Entering data set featuresections")
                 dataset = self.get_data(key)
                 seq = dataset['features'][...]
+                print(f'shape of seq befor unsequeeze {seq.shape}')
                 seq = torch.from_numpy(seq).unsqueeze(0)
                 target = dataset['gtscore'][...]
                 target = torch.from_numpy(target).unsqueeze(0)
@@ -289,7 +290,7 @@ class AONet:
 
                 
 
-               
+                print(f'shape of seq is {seq.shape}')
                 seq_len = seq.shape[1]
 
                 m = seq.shape[2]
