@@ -176,7 +176,7 @@ class AONet:
                         hps.DEC_DROPOUT, 
                         hps.device)    
         # gpus = [0,1,2,3,4,5,6,7]             
-        gpus = [0,1]  
+        gpus = [0]  
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
@@ -242,7 +242,7 @@ class AONet:
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
         # gpus = [0,1,2,3,4,5,6,7,]
-        gpus = [0, 1]
+        gpus = [0]
         self.model = nn.DataParallel(self.model, device_ids=gpus) # TODO remove the gpus style
         
         # self.model.to(hps.device)
