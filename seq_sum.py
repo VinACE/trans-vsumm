@@ -202,7 +202,17 @@ class MultiHeadAttentionLayer(nn.Module):
         
         #x = [batch size, query len, hid dim]
         '''
-
+        print(f' Shape of Q is {Q.shape}')
+        print("**********************************")
+        print(f' Shape of K is {K.shape}')
+                
+        energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
+        
+        #energy = [batch size, n heads, query len, key len]
+        # import pdb;pdb.set_trace
+        print("**********************************")
+        print(f' Shape of mask is {mask.shape}')
+        print("**********************************")
 
 
         energy = torch.einsum("nqhd,nkhd->nhqk", [Q, K])
@@ -215,8 +225,15 @@ class MultiHeadAttentionLayer(nn.Module):
         
         attention = torch.softmax(energy / (self.hid_dim ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
 
+
+        print("**********************************")
+        print(f' Shape of batch is {batch_size}')
+        print("**********************************")
+        print(f' Shape of batch is {query_len}')
+        print(f' Shape of batch is {query_len}')
+
         out = torch.einsum("nhql,nlhd->nqhd", [attention, V]).reshape(
-            batch_size, query_len, self.n_heads * self.hid_dim
+            N, query_len, self.n_heads * self.hid_dim
         )
 
         x = self.fc_o(out)
