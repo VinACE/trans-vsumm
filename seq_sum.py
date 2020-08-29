@@ -233,7 +233,7 @@ class MultiHeadAttentionLayer(nn.Module):
         print(f' Shape of batch is {query_len}')
 
         out = torch.einsum("nhql,nlhd->nqhd", [attention, V]).reshape(
-            N, query_len, self.n_heads * self.hid_dim
+            N, query_len, self.n_heads * self.head_dim 
         )
 
         x = self.fc_o(out)
