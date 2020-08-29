@@ -226,11 +226,11 @@ class MultiHeadAttentionLayer(nn.Module):
         attention = torch.softmax(energy / (self.hid_dim ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
 
 
-        print("**********************************")
-        print(f' Shape of batch is {batch_size}')
-        print("**********************************")
-        print(f' Shape of batch is {query_len}')
-        print(f' Shape of batch is {query_len}')
+        # print("**********************************")
+        # print(f' Shape of batch is {batch_size}')
+        # print("**********************************")
+        # print(f' Shape of batch is {query_len}')
+        # print(f' Shape of batch is {query_len}')
 
         out = torch.einsum("nhql,nlhd->nqhd", [attention, V]).reshape(
             N, query_len, self.n_heads * self.head_dim 
@@ -312,7 +312,7 @@ class Decoder(nn.Module):
         pos = torch.arange(0, trg_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
                             
         #pos = [batch size, trg len]
-            
+        trg = torch.tensor(trg).to(self.device).long()        
         trg = self.dropout((self.tok_embedding(trg) * self.scale)) #  + self.pos_embedding(pos))
                 
         #trg = [batch size, trg len, hid dim]
