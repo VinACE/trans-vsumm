@@ -213,7 +213,7 @@ class MultiHeadAttentionLayer(nn.Module):
         if mask is not None:
             energy =  energy.masked_fill(mask == 0, float("-1e10")) # for numerical stability
         
-        attention = torch.softmax(energy / (self.embed_size ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
+        attention = torch.softmax(energy / (self.hid_dim ** (1/2)), dim=3) # Attention(Q,K,V) = sofmax(QK^{T}/(d_{k})**(1/2)) * V
 
         out = torch.einsum("nhql,nlhd->nqhd", [attention, V]).reshape(
             batch_size, query_len, self.n_heads * self.hid_dim
