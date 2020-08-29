@@ -43,7 +43,14 @@ class HParameters:
 
         #### ses2seq network initialization #################################
 
+        count = torch.cuda.device_count()
+        if count == 1:
+            self.gpus = [0]
+        else:
+            self.gpus = [i for i in range(count)]
+
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.gpus
         self.INPUT_DIM = 1024
         self.OUTPUT_DIM = 1024
         self.HID_DIM =  256 #1024
