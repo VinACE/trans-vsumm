@@ -278,12 +278,12 @@ class AONet:
                 dataset = self.get_data(key)
                 seq = dataset['features'][...]
                 print(f'shape of seq befor unsequeeze {seq.shape}') # TODO remove the prints for shape
-                print(f'size of seq befor unsequeeze {seq.size()}')
+                # print(f'size of seq befor unsequeeze {seq.size()}')
                 print(f'type of seq is {type(seq)}')
                 seq = torch.from_numpy(seq).unsqueeze(0)
 
                 print(f'shape of seq after unsequeeze {seq.shape}') # TODO remove the prints for shape
-                print(f'size of seq afterunsequeeze {seq.size()}')
+                # print(f'size of seq afterunsequeeze {seq.size()}')
                 print(f'type of seq after is {type(seq)}')
                 seq = torch.narrow(seq,2,0,512)
                 target = dataset['gtscore'][...]
