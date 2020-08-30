@@ -298,6 +298,7 @@ class AONet:
                 
 
                 print(f'shape of seq is {seq.shape}')
+                 print(f'shape of seq is {target.shape}')
                 seq_len = seq.shape[1]
 
                 m = seq.shape[2]
