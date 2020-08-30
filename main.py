@@ -158,7 +158,7 @@ class AONet:
         np.random.seed(rnd_seed)
         torch.manual_seed(rnd_seed)
 
-        # self.model = VASNet()
+        self.model = VASNet()
 
         enc = Encoder(hps.INPUT_DIM, 
                         hps.HID_DIM, 
@@ -177,7 +177,7 @@ class AONet:
                         hps.device)    
           
         gpus = hps.gpus
-        self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
+        # self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
 
@@ -317,8 +317,11 @@ class AONet:
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
 
                 print(type(y))
-                print(f' shape of y is {y.shape}')
+                print(f'shape of y is {y.shape}')
                 print(f'shape of target is {target.shape}')
+                print(f'target is {target')
+                print(f'y is {y}')
+
                 loss_att = 0
 
                 loss = criterion(y, target)
@@ -365,6 +368,7 @@ class AONet:
                 # seq = self.dataset[key]['features'][...]
                 seq = data['features'][...]
                 seq = torch.from_numpy(seq).unsqueeze(0)
+                seq = torch.narrow(seq,2,0,512)
 
                 if self.hps.use_cuda:
                     seq = seq.float().cuda()
