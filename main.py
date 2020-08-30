@@ -246,7 +246,7 @@ class AONet:
         self.model = nn.DataParallel(self.model, device_ids=gpus) # TODO remove the gpus style
         
         self.model.to(hps.device)
-        # self.model.cuda()
+        self.model.cuda()
         self.model.train()
 
         criterion = nn.MSELoss()
