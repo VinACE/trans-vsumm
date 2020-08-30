@@ -20,7 +20,7 @@ from config import  *
 from sys_utils import *
 from vsum_tools import  *
 from vasnet_model import  *
-from seq_sum import *
+# from seq_sum import *
 
 def weights_init(m):
     classname = m.__class__.__name__
@@ -180,7 +180,7 @@ class AONet:
         # self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
         torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
-
+        print(f"self.model !!!!!!!!!!!!!!!!!! {self.model}")
         # self.model.to(hps.device)
         self.model.cuda()
         self.model.eval()
@@ -239,9 +239,11 @@ class AONet:
                         hps.DEC_DROPOUT, 
                         hps.device)    
                      
-        self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
+        # self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
+
         torch.cuda.empty_cache()
         
+        self.model.train()
         gpus = hps.gpus
         self.model = nn.DataParallel(self.model, device_ids=gpus) # TODO remove the gpus style
         
