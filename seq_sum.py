@@ -64,10 +64,11 @@ class Encoder(nn.Module):
         pos = torch.arange(0, src_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
         
         #pos = [batch size, src len]
-        # src = torch.tensor(src).to(self.device).long()
+        src = torch.tensor(src).to(self.device).long()
         src = src.cuda()
+        self.scale = self.scale.cuda()
         src = self.dropout((self.tok_embedding(src) * self.scale)) #  + self.pos_embedding(pos))
-        
+       
         #src = [batch size, src len, hid dim]
         
         for layer in self.layers:
