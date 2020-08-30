@@ -315,7 +315,9 @@ class AONet:
                 # TODO: normalize the target frame features. according to the scores..
                 y, _ = self.model(seq, trg)   ## TODO  look how they are training the seq2seq model....
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
+
                 print(type(y))
+                print(f' shape of y is {y.shape}')
                 loss_att = 0
 
                 loss = criterion(y, target)
