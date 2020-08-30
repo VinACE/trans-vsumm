@@ -317,7 +317,9 @@ class Decoder(nn.Module):
         pos = torch.arange(0, trg_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
                             
         #pos = [batch size, trg len]
-        trg = torch.tensor(trg).to(self.device).long()        
+        trg = torch.tensor(trg).to(self.device).long()     
+        trg = trg.cuda()
+        self.scale = self.scale.cuda()   
         trg = self.dropout((self.tok_embedding(trg) * self.scale)) #  + self.pos_embedding(pos))
                 
         #trg = [batch size, trg len, hid dim]
