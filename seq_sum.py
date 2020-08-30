@@ -207,7 +207,9 @@ class MultiHeadAttentionLayer(nn.Module):
         print(f' Shape of Q is {Q.shape}')
         print("**********************************")
         print(f' Shape of K is {K.shape}')
-                
+        
+        Q = Q.cuda()
+        K = K.cuda()
         energy = torch.matmul(Q, K.permute(0, 1, 3, 2)) / self.scale
         
         #energy = [batch size, n heads, query len, key len]
