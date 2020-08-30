@@ -318,6 +318,7 @@ class AONet:
 
                 print(type(y))
                 print(f' shape of y is {y.shape}')
+                print(f'shape of target is {target.shape}')
                 loss_att = 0
 
                 loss = criterion(y, target)
