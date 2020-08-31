@@ -321,7 +321,7 @@ class AONet:
                 print(type(y))
                 print(f'shape of y is {y.shape}')
                 print(f'shape of target is {target.shape}')
-                print(f'target is {target')
+                print(f'target is {target}')
                 print(f'y is {y}')
 
                 loss_att = 0

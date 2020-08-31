@@ -58,7 +58,7 @@ class SelfAttention(nn.Module):
         weights = self.drop50(att_weights_)
         y = torch.matmul(V.transpose(1,0), weights).transpose(1,0)
         y = self.output_linear(y)
-
+        
         return y, att_weights_
 
 
