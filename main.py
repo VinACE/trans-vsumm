@@ -20,7 +20,7 @@ from config import  *
 from sys_utils import *
 from vsum_tools import  *
 from vasnet_model import  *
-# from seq_sum import *
+from seq_sum import *
 
 def weights_init(m):
     classname = m.__class__.__name__

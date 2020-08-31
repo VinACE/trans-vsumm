@@ -112,3 +112,6 @@ if __name__ == "__main__":
 
     hps.load_from_args(args)
     print(hps)
+
+
+# TODO when chaning the dimension, need to change the max_length,narrow and i/p out size
