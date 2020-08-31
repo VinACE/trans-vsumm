@@ -423,6 +423,8 @@ class Seq2Seq(nn.Module):
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
+
+        print(f'shape of output is and attention is {output.shape}, {attention.shape}')
         
         return output, attention
 
