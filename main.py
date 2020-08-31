@@ -223,6 +223,7 @@ class AONet:
     def train(self, output_dir='EX-0'):
 
         print("Initializing VASNet/Seq2seq model and optimizer...")
+        '''
         enc = Encoder(hps.INPUT_DIM, 
                         hps.HID_DIM, 
                         hps.ENC_LAYERS, 
@@ -238,7 +239,7 @@ class AONet:
                         hps.DEC_PF_DIM, 
                         hps.DEC_DROPOUT, 
                         hps.device)    
-                     
+        '''             
         # self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
 
         torch.cuda.empty_cache()
