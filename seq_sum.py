@@ -21,6 +21,8 @@ import math
 import time
 from IPython.core.debugger import set_trace #set_trace()
 
+from layer_norm import  *
+
 
 ######## ENCODER PART #################################
 
@@ -406,6 +408,19 @@ class Seq2Seq(nn.Module):
         self.src_pad_idx = src_pad_idx
         self.trg_pad_idx = trg_pad_idx
         self.device = device
+        # Frame level importance score regression
+        # Two layer NN 
+        self.ka = nn.Linear(in_features=self.m, out_features=1024)
+        self.kb = nn.Linear(in_features=self.ka.out_features, out_features=1024)
+        self.kc = nn.Linear(in_features=self.kb.out_features, out_features=1024)
+        self.kd = nn.Linear(in_features=self.ka.out_features, out_features=1)
+
+        self.sig = nn.Sigmoid()
+        self.relu = nn.ReLU()
+        self.drop50 = nn.Dropout(0.5)
+        self.softmax = nn.Softmax(dim=0)
+        self.layer_norm_y = LayerNorm(self.m)
+        self.layer_norm_ka = LayerNorm(self.ka.out_features)
         
     def make_src_mask(self, src):
         #src = [batch size, src len]
@@ -437,6 +452,8 @@ class Seq2Seq(nn.Module):
         return trg_mask
 
     def forward(self, src, trg):
+
+        m = x.shape[2] # Feature size
         
         #src = [batch size, src len]
         #trg = [batch size, trg len]
@@ -447,15 +464,33 @@ class Seq2Seq(nn.Module):
         #trg_mask = [batch size, 1, trg len, trg len]
         
         enc_src = self.encoder(src, src_mask)
+
+        x = src.view(-1,m)
         
         #enc_src = [batch size, src len, hid dim]
                 
-        output, attention = self.decoder(trg, enc_src, trg_mask, src_mask)
+        y, attention = self.decoder(trg, enc_src, trg_mask, src_mask)
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
         
-        return output, attention
+        y = y + x
+        y = self.drop50(y)
+        y = self.layer_norm_y(y)
+
+        # Frame level importance score regression
+        # Two layer NN
+        y = self.ka(y)
+        y = self.relu(y)
+        y = self.drop50(y)
+        y = self.layer_norm_ka(y)
+
+        y = self.kd(y)
+        y = self.sig(y)
+        y = y.view(1, -1)
+
+        
+        return y, attention
 
 
 # if __name__ == "__main__":
