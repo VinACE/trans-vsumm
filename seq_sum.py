@@ -493,7 +493,7 @@ class Seq2Seq(nn.Module):
         
 
         y = y.view(1, -1)
-        print(f'Shape of y is {y.shape}' )
+        print(f'Shape of y  after view is {y.shape}' )
         
         return y, attention
 
