@@ -471,6 +471,8 @@ class Seq2Seq(nn.Module):
         #enc_src = [batch size, src len, hid dim]
                 
         y, attention = self.decoder(trg, enc_src, trg_mask, src_mask)
+
+        print(f'shape after attention y is ### {y.shape}')
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
