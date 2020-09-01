@@ -480,7 +480,7 @@ class Seq2Seq(nn.Module):
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
         
-        y = y # + x
+        # y = y # + x
         y = self.drop50(y)
         y = self.layer_norm_y(y)
 
