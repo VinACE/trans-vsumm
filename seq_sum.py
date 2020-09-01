@@ -475,7 +475,10 @@ class Seq2Seq(nn.Module):
         print(f'shape after attention y is ### {y.shape}')
 
         print(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
-        print(f'{y}')
+
+        y = y.sequeeze(y,1)
+        # print(f'{y}')
+        print(f'shape after sequeeze y is ### {y.shape}')
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
