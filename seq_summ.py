@@ -454,8 +454,8 @@ class Seq2Seq(nn.Module):
 
     def forward(self, src, trg):
 
-        m = src.shape[1] # Feature size
-        
+        m = src.shape[3] # Feature size
+
         
         #src = [batch size, src len]
         #trg = [batch size, trg len]
