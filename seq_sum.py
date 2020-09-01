@@ -480,6 +480,7 @@ class Seq2Seq(nn.Module):
         # print(f'{y}')
         print(f'shape after sequeeze y is ### {y.shape}')
         print(f'size after sequeeze y is ### {y.size()}')
+        print(f'y is  {y}')
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
