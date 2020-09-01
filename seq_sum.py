@@ -489,14 +489,14 @@ class Seq2Seq(nn.Module):
         y = self.layer_norm_ka(y)
 
         y = self.kd(y)
-        print(f'Shape of y before sigmod is {y.shape}' )
+        # print(f'Shape of y before sigmod is {y.shape}' )
         y = self.sig(y)
-        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        print(f'Shape of y is {y.shape}' )
+        # print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        # print(f'Shape of y is {y.shape}' )
         
 
         y = y.view(1, -1)
-        print(f'Shape of y  after view is {y.shape}' )
+        # print(f'Shape of y  after view is {y.shape}' )
         
         return y, attention
 
