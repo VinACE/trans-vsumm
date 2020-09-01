@@ -476,11 +476,10 @@ class Seq2Seq(nn.Module):
 
         print(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-        y1 = torch.squeeze(y,1)
-            
+        y = y.squeeze(1)
         # print(f'{y}')
-        print(f'shape after sequeeze y is ### {y1.shape}')
-        print(f'size after sequeeze y is ### {y1.size()}')
+        print(f'shape after sequeeze y is ### {y.shape}')
+        print(f'size after sequeeze y is ### {y.size()}')
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
