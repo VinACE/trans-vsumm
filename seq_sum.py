@@ -410,6 +410,7 @@ class Seq2Seq(nn.Module):
         self.device = device
         # Frame level importance score regression
         # Two layer NN 
+        self.m = 256  # TODO Need to change this as a common parameter
         self.ka = nn.Linear(in_features=self.m, out_features=1024)
         self.kb = nn.Linear(in_features=self.ka.out_features, out_features=1024)
         self.kc = nn.Linear(in_features=self.kb.out_features, out_features=1024)

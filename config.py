@@ -114,4 +114,5 @@ if __name__ == "__main__":
     print(hps)
 
 
-# TODO when chaning the dimension, need to change the max_length,narrow and i/p out size
+# TODO when chaning the dimension, need to change the max_length,narrow and i/p out size 
+# TODO self.m = 256 in seq_summ file...
