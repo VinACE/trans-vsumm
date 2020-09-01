@@ -456,6 +456,7 @@ class Seq2Seq(nn.Module):
 
         m = src.shape[1] # Feature size
         
+        
         #src = [batch size, src len]
         #trg = [batch size, trg len]
         src_mask = self.make_src_mask(src)
