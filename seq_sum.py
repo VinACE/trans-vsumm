@@ -476,11 +476,17 @@ class Seq2Seq(nn.Module):
 
         print(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-        y = y.squeeze()
+        # y = y.squeeze()
+
+        u = y.shape[0]
+        v = y.shape[1]
+
+        y = y.reshape(u,v)
         # print(f'{y}')
         print(f'shape after sequeeze y is ### {y.shape}')
         print(f'size after sequeeze y is ### {y.size()}')
         print(f'y is  {y}')
+        print(f'NUMEL in y is {y.numel()}')
         
         #output = [batch size, trg len, output dim]
         #attention = [batch size, n heads, trg len, src len]
