@@ -488,8 +488,12 @@ class Seq2Seq(nn.Module):
 
         y = self.kd(y)
         y = self.sig(y)
-        y = y.view(1, -1)
+        print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
+        print(f'Shape of y is {y.shape}' )
+        
 
+        y = y.view(1, -1)
+        print(f'Shape of y is {y.shape}' )
         
         return y, attention
 
