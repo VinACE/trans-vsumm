@@ -476,7 +476,8 @@ class Seq2Seq(nn.Module):
 
         print(f'!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 
-        y = torch.sequeeze(y,1)
+        y = torch.squeeze(y,1)
+            
         # print(f'{y}')
         print(f'shape after sequeeze y is ### {y.shape}')
         print(f'size after sequeeze y is ### {y.size()}')
