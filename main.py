@@ -178,7 +178,7 @@ class AONet:
        
         gpus = hps.gpus
         self.model = Seq2Seq(enc,dec, hps.SRC_PAD_IDX,hps.TRG_PAD_IDX, hps.device)
-        torch.cuda.empty_cache()
+        # torch.cuda.empty_cache()
         self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style
         print(f"self.model !!!!!!!!!!!!!!!!!! {self.model}")
         # self.model.to(hps.device)
