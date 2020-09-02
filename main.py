@@ -298,10 +298,17 @@ class AONet:
 
                 # TODO for now making the src and target as same
 
-                
-
+                print(f'-----------------+++++++++++++++++++++++++++++++++++++++++')
                 print(f'shape of seq is {seq.shape}')
                 print(f'shape of target is {target.shape}')
+                print(f'-----------------+++++++++++++++++++++++++++++++++++++++++')
+                print(f'shape of seq is {seq}')
+                print(f'-----------------+++++++++++++++++++++++++++++++++++++++++')
+                print(f'shape of target is {target}')
+                print(f'-----------------+++++++++++++++++++++++++++++++++++++++++')
+
+
+
                 seq_len = seq.shape[1]
 
                 m = seq.shape[2]
@@ -316,7 +323,7 @@ class AONet:
                 # y, _ = self.model(seq,seq_len)
 
                 # TODO: normalize the target frame features. according to the scores..
-                y, _ = self.model(seq, trg)   ## TODO  look how they are training the seq2seq model....
+                y, _ = self.model(seq, trg )   ## TODO  look how they are training the seq2seq model....
                 print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
 
                 print(type(y))
