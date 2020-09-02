@@ -398,8 +398,8 @@ class Seq2Seq(nn.Module):
     def __init__(self, 
                  encoder, 
                  decoder, 
-                 src_pad_idx, 
-                 trg_pad_idx, 
+                 src_pad_idx=0, 
+                 trg_pad_idx=0, 
                  device):
         super().__init__()
         
