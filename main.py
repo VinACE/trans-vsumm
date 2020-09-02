@@ -323,7 +323,7 @@ class AONet:
                 # y, _ = self.model(seq,seq_len)
 
                 # TODO: normalize the target frame features. according to the scores..
-                if torch.is_tensor(seq) and torch.is_tensor(seq):
+                if torch.is_tensor(seq) and torch.is_tensor(trg):
                         
                     y, _ = self.model(seq, trg )   ## TODO  look how they are training the seq2seq model....
                     print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
