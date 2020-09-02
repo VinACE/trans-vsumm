@@ -35,7 +35,7 @@ class Encoder(nn.Module):
                  pf_dim,
                  dropout, 
                  device,
-                 max_length = 256):
+                 max_length = 128):
         super().__init__()
 
         self.device = device
@@ -284,7 +284,7 @@ class Decoder(nn.Module):
                  pf_dim, 
                  dropout, 
                  device,
-                 max_length = 256):
+                 max_length = 128):
         super().__init__()
         
         self.device = device
@@ -410,10 +410,10 @@ class Seq2Seq(nn.Module):
         self.device = device
         # Frame level importance score regression
         # Two layer NN 
-        self.m = 256  # TODO Need to change this as a common parameter
-        self.ka = nn.Linear(in_features=self.m, out_features=256)
-        self.kb = nn.Linear(in_features=self.ka.out_features, out_features=256)
-        self.kc = nn.Linear(in_features=self.kb.out_features, out_features=256)
+        self.m = 128  # TODO Need to change this as a common parameter
+        self.ka = nn.Linear(in_features=self.m, out_features=128)
+        self.kb = nn.Linear(in_features=self.ka.out_features, out_features=128)
+        self.kc = nn.Linear(in_features=self.kb.out_features, out_features=128)
         self.kd = nn.Linear(in_features=self.ka.out_features, out_features=1)
 
         self.sig = nn.Sigmoid()

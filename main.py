@@ -288,7 +288,7 @@ class AONet:
                 print(f'shape of seq after unsequeeze {seq.shape}') # TODO remove the prints for shape
                 # print(f'size of seq afterunsequeeze {seq.size()}')
                 print(f'type of seq after is {type(seq)}')
-                seq = torch.narrow(seq,2,0,256)
+                seq = torch.narrow(seq,2,0,128)
                 target = dataset['gtscore'][...]
                 target = torch.from_numpy(target).unsqueeze(0)
 
@@ -371,7 +371,7 @@ class AONet:
                 # seq = self.dataset[key]['features'][...]
                 seq = data['features'][...]
                 seq = torch.from_numpy(seq).unsqueeze(0)
-                seq = torch.narrow(seq,2,0,256)
+                seq = torch.narrow(seq,2,0,128)
 
                 if self.hps.use_cuda:
                     seq = seq.float().cuda()

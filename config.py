@@ -51,15 +51,15 @@ class HParameters:
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.gpus
-        self.INPUT_DIM = 256
-        self.OUTPUT_DIM = 256
-        self.HID_DIM =  256 #1024
+        self.INPUT_DIM = 128
+        self.OUTPUT_DIM = 128
+        self.HID_DIM =  128 #256(org)
         self.ENC_LAYERS = 1# TODO Changed the Encoder layer from 3 to 1
         self.DEC_LAYERS = 1 # TODO Changedd the Decoder layer from 3 to 1
         self.ENC_HEADS = 8
         self.DEC_HEADS = 8
-        self.ENC_PF_DIM =  512 # TODO Changed from 512 to 1024
-        self.DEC_PF_DIM =  512 # TODO Changed from 512 to 1024
+        self.ENC_PF_DIM =  128 # TODO Changed from 512 to 1024
+        self.DEC_PF_DIM =  128 # TODO Changed from 512 to 1024
         self.ENC_DROPOUT = 0.1
         self.DEC_DROPOUT = 0.1
 
