@@ -312,8 +312,8 @@ class Decoder(nn.Module):
         #trg_mask = [batch size, trg len]
         #src_mask = [batch size, src len]
                 
-        # batch_size = trg.shape[0]
-        batch_size = 1
+        batch_size = trg.shape[0]
+        # batch_size = 1
         trg_len = trg.shape[1]
         
         pos = torch.arange(0, trg_len).unsqueeze(0).repeat(batch_size, 1).to(self.device)
