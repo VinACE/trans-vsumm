@@ -323,26 +323,26 @@ class AONet:
                 # y, _ = self.model(seq,seq_len)
 
                 # TODO: normalize the target frame features. according to the scores..
-                if torch.is_tensor(seq) and torch.is_tensor(trg):
+                # if torch.is_tensor(seq) and torch.is_tensor(trg):
                         
-                    y, _ = self.model(seq, trg )   ## TODO  look how they are training the seq2seq model....
-                    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
+                y, _ = self.model(seq, trg)   ## TODO  look how they are training the seq2seq model....
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^")
 
-                    print(type(y))
-                    print(f'shape of y is {y.shape}')
-                    print(f'shape of target is {target.shape}')
-                    print(f'target is {target}')
-                    print(f'y is {y}')
+                print(type(y))
+                print(f'shape of y is {y.shape}')
+                print(f'shape of target is {target.shape}')
+                print(f'target is {target}')
+                print(f'y is {y}')
 
-                    loss_att = 0
+                loss_att = 0
 
-                    loss = criterion(y, target)
-                    # loss2 = y.sum()/seq_len
-                    loss = loss + loss_att
-                    self.optimizer.zero_grad()
-                    loss.backward()
-                    self.optimizer.step()
-                    avg_loss.append([float(loss), float(loss_att)])
+                loss = criterion(y, target)
+                # loss2 = y.sum()/seq_len
+                loss = loss + loss_att
+                self.optimizer.zero_grad()
+                loss.backward()
+                self.optimizer.step()
+                avg_loss.append([float(loss), float(loss_att)])
 
             # Evaluate test dataset
             val_fscore, video_scores = self.eval(self.test_keys)

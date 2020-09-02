@@ -441,7 +441,7 @@ class Seq2Seq(nn.Module):
         print(f'***** {trg}')
         print(f'***** {trg.shape}')
         print(f'{self.trg_pad_idx}')
-        
+        # if torch.is_tensor(trg_pad_mask):
         trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
         
         #trg_pad_mask = [batch size, 1, 1, trg len]
