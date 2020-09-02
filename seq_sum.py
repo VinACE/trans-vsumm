@@ -398,15 +398,17 @@ class Seq2Seq(nn.Module):
     def __init__(self, 
                  encoder, 
                  decoder, 
-                 src_pad_idx=0, 
-                 trg_pad_idx=0, 
+                 src_pad_idx, 
+                 trg_pad_idx, 
                  device):
         super().__init__()
         
         self.encoder = encoder
         self.decoder = decoder
-        self.src_pad_idx = src_pad_idx
-        self.trg_pad_idx = trg_pad_idx
+        # self.src_pad_idx = src_pad_idx
+        # self.trg_pad_idx = trg_pad_idx
+        self.src_pad_idx = 0
+        self.trg_pad_idx = 0
         self.device = device
         # Frame level importance score regression
         # Two layer NN 
