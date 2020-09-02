@@ -41,7 +41,7 @@ class Encoder(nn.Module):
         self.device = device
         
         self.tok_embedding = nn.Embedding(input_dim, hid_dim)
-        # self.pos_embedding = nn.Embedding(max_length, hid_dim)
+        self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
         self.layers = nn.ModuleList([EncoderLayer(hid_dim, 
                                                   n_heads, 
@@ -69,7 +69,7 @@ class Encoder(nn.Module):
         src = torch.tensor(src).to(self.device).long()
         src = src.cuda()
         self.scale = self.scale.cuda()
-        src = self.dropout((self.tok_embedding(src) * self.scale)) # + self.pos_embedding(pos))
+        src = self.dropout((self.tok_embedding(src) * self.scale) + self.pos_embedding(pos))
        
         #src = [batch size, src len, hid dim]
         
@@ -290,7 +290,7 @@ class Decoder(nn.Module):
         self.device = device
         
         self.tok_embedding = nn.Embedding(output_dim, hid_dim)
-        # self.pos_embedding = nn.Embedding(max_length, hid_dim)
+        self.pos_embedding = nn.Embedding(max_length, hid_dim)
         
         self.layers = nn.ModuleList([DecoderLayer(hid_dim, 
                                                   n_heads, 
@@ -322,7 +322,7 @@ class Decoder(nn.Module):
         trg = torch.tensor(trg).to(self.device).long()     
         trg = trg.cuda()
         self.scale = self.scale.cuda()   
-        trg = self.dropout((self.tok_embedding(trg) * self.scale)) #  + self.pos_embedding(pos))
+        trg = self.dropout((self.tok_embedding(trg) * self.scale) + self.pos_embedding(pos))
                 
         #trg = [batch size, trg len, hid dim]
         
