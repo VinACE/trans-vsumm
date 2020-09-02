@@ -246,7 +246,7 @@ class AONet:
         
         self.model.train()
         gpus = hps.gpus
-        self.model = nn.DataParallel(self.model, device_ids=gpus) # TODO remove the gpus style
+        self.model = nn.DataParallel(self.model, device_ids=gpus, dim=0) # TODO remove the gpus style and added a dim=0 need to validate dim=0
         
         self.model.to(hps.device)
         # self.model.cuda()
