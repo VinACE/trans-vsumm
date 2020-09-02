@@ -412,7 +412,7 @@ class Seq2Seq(nn.Module):
         # Two layer NN 
         self.m = 512  # TODO Need to change this as a common parameter
         self.ka = nn.Linear(in_features=self.m, out_features=512)
-        self.kb = nn.Linear(in_features=self.ka.out_features, out_features512)
+        self.kb = nn.Linear(in_features=self.ka.out_features, out_features=512)
         self.kc = nn.Linear(in_features=self.kb.out_features, out_features=512)
         self.kd = nn.Linear(in_features=self.ka.out_features, out_features=1)
 
