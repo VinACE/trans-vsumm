@@ -435,7 +435,7 @@ class Seq2Seq(nn.Module):
         return src_mask
     
     def make_trg_mask(self, trg):
-        # import pdb; pdb.set_trace()
+        import pdb; pdb.set_trace()
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         print(f'***** {trg}')
@@ -459,11 +459,14 @@ class Seq2Seq(nn.Module):
         return trg_mask
 
     def forward(self, src, trg):
-
+        import pdb;pdb.set_trace()
+        print(f'Entering forward pass in seq2seq model!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!LLLLLLLLLLLLLLLL')
         m = src.shape[1] # Feature size
         
         #src = [batch size, src len]
         #trg = [batch size, trg len]
+        
+        # TODO put a check....
         src_mask = self.make_src_mask(src)
         trg_mask = self.make_trg_mask(trg)
         
