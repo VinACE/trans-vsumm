@@ -441,6 +441,7 @@ class Seq2Seq(nn.Module):
 
         if type(trg)!= 'int':
             print(f'***** {trg}')
+            print(f'***** {type(trg)}')
             # print(f'***** {trg.shape}')
             # print(f'{self.trg_pad_idx}')
             # # if torch.is_tensor(trg_pad_mask):
