@@ -118,3 +118,4 @@ if __name__ == "__main__":
 
 # TODO when chaning the dimension, need to change the max_length,narrow and i/p out size 
 # TODO self.m = 256 in seq_summ file...
+# TODO trg_len = 128  create trg_mask needs a hard coding now... Need to remove..

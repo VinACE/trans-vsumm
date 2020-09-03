@@ -459,7 +459,7 @@ class Seq2Seq(nn.Module):
             #trg_mask = [batch size, 1, trg len, trg len]
 
         else:
-
+            trg_len = trg
             trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
             trg_mask = trg_sub_mask
         
