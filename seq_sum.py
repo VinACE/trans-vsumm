@@ -439,32 +439,32 @@ class Seq2Seq(nn.Module):
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        if isinstance(trg, int):
-            trg_len = trg
-            # trg_len = 128
-            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
-            trg_mask = trg_sub_mask
+        # if isinstance(trg, int):
+        #     trg_len = trg
+        #     # trg_len = 128
+        #     trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
+        #     trg_mask = trg_sub_mask
 
-        else:
+        # else:
 
-            print(f'***** {trg}')
-            print(f'***** {type(trg)}')
-            # print(f'***** {trg.shape}')
-            # print(f'{self.trg_pad_idx}')
-            # # if torch.is_tensor(trg_pad_mask):
-            trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
+        print(f'***** {trg}')
+        print(f'***** {type(trg)}')
+        # print(f'***** {trg.shape}')
+        # print(f'{self.trg_pad_idx}')
+        # # if torch.is_tensor(trg_pad_mask):
+        trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
+        
+        #trg_pad_mask = [batch size, 1, 1, trg len]
+        
+        trg_len = trg.shape[1]
+        
+        trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
+        
+        #trg_sub_mask = [trg len, trg len]
             
-            #trg_pad_mask = [batch size, 1, 1, trg len]
-            
-            trg_len = trg.shape[1]
-            
-            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
-            
-            #trg_sub_mask = [trg len, trg len]
-                
-            trg_mask = trg_pad_mask & trg_sub_mask
-            
-            #trg_mask = [batch size, 1, trg len, trg len]
+        trg_mask = trg_pad_mask & trg_sub_mask
+        
+        #trg_mask = [batch size, 1, trg len, trg len]
         
         return trg_mask
 
