@@ -438,23 +438,30 @@ class Seq2Seq(nn.Module):
         # import pdb; pdb.set_trace()
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
-        print(f'***** {trg}')
-        print(f'***** {trg.shape}')
-        print(f'{self.trg_pad_idx}')
-        # if torch.is_tensor(trg_pad_mask):
-        trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
-        
-        #trg_pad_mask = [batch size, 1, 1, trg len]
-        
-        trg_len = trg.shape[1]
-        
-        trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
-        
-        #trg_sub_mask = [trg len, trg len]
+
+        if type(trg)!= 'int'
+            # print(f'***** {trg}')
+            # print(f'***** {trg.shape}')
+            # print(f'{self.trg_pad_idx}')
+            # # if torch.is_tensor(trg_pad_mask):
+            trg_pad_mask = (trg != self.trg_pad_idx).unsqueeze(1).unsqueeze(2)
             
-        trg_mask = trg_pad_mask & trg_sub_mask
-        
-        #trg_mask = [batch size, 1, trg len, trg len]
+            #trg_pad_mask = [batch size, 1, 1, trg len]
+            
+            trg_len = trg.shape[1]
+            
+            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
+            
+            #trg_sub_mask = [trg len, trg len]
+                
+            trg_mask = trg_pad_mask & trg_sub_mask
+            
+            #trg_mask = [batch size, 1, trg len, trg len]
+
+        else:
+
+            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
+            trg_mask = trg_sub_mask
         
         return trg_mask
 
