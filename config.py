@@ -55,7 +55,7 @@ class HParameters:
         self.gpus
         self.INPUT_DIM = 128
         self.OUTPUT_DIM = 128
-        self.HID_DIM =  128 #256(org)
+        self.HID_DIM =  64 #256(org)
         self.ENC_LAYERS = 1# TODO Changed the Encoder layer from 3 to 1
         self.DEC_LAYERS = 1 # TODO Changedd the Decoder layer from 3 to 1
         self.ENC_HEADS = 8
