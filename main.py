@@ -187,12 +187,12 @@ class AONet:
         self.model.apply(weights_init) ## TODO Need to check how to initialize the weights.
         #print(self.model)
 
-        cuda_device = cuda_device or self.hps.cuda_device
+        # cuda_device = cuda_device or self.hps.cuda_device
 
-        if self.hps.use_cuda:
-            print("Setting CUDA device: ",cuda_device)
-            torch.cuda.set_device(cuda_device)
-            torch.cuda.manual_seed(rnd_seed)
+        # if self.hps.use_cuda:
+        #     print("Setting CUDA device: ",cuda_device)
+        #     torch.cuda.set_device(cuda_device)
+        #     torch.cuda.manual_seed(rnd_seed)
 
         if self.hps.use_cuda:
             self.model.cuda()
