@@ -435,7 +435,7 @@ class Seq2Seq(nn.Module):
         return src_mask
     
     def make_trg_mask(self, trg):
-        
+        import pdb; pdb.set_trace()
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
         print(f'***** {trg}')
