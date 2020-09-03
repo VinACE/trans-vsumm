@@ -16,7 +16,7 @@ class HParameters:
     def __init__(self):
         self.verbose = False
         self.use_cuda = True
-        self.cuda_device = 0
+        # self.cuda_device = 0 # added at the bottom of gpus
         self.max_summary_length = 0.15
 
         self.l2_req = 0.00001
@@ -48,6 +48,8 @@ class HParameters:
             self.gpus = [0]
         else:
             self.gpus = [i for i in range(count)]
+        
+        self.cuda_device = self.gpus
 
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.gpus
