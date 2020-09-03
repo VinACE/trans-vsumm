@@ -317,14 +317,15 @@ class AONet:
                 seq_len = seq.shape[1]
 
                 m = seq.shape[2]
-                import pdb;pdb.set_trace
+                # import pdb;pdb.set_trace
                 seq = seq.view(-1, m)
                 trg = seq
                 
                 # if self.hps.use_cuda:                                     ## TODO Need to verify this step
                 seq, target, trg = seq.float().cuda(), target.float().cuda() , trg.float().cuda()
 
-
+                print(f"NUMELLLLLLLLLLLLLL {seq.numel()}")
+                print(f"NUMELLLLLLLLLLLLLL {trg.numel()}")
                 # y, _ = self.model(seq,seq_len)
 
                 # TODO: normalize the target frame features. according to the scores..
