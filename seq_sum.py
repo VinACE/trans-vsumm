@@ -439,7 +439,13 @@ class Seq2Seq(nn.Module):
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        if type(trg)!= 'int':
+        if isinstance(trg, int):
+            trg_len = trg
+            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
+            trg_mask = trg_sub_mask
+
+        else:
+
             print(f'***** {trg}')
             print(f'***** {type(trg)}')
             # print(f'***** {trg.shape}')
@@ -458,11 +464,6 @@ class Seq2Seq(nn.Module):
             trg_mask = trg_pad_mask & trg_sub_mask
             
             #trg_mask = [batch size, 1, trg len, trg len]
-
-        else:
-            trg_len = trg
-            trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
-            trg_mask = trg_sub_mask
         
         return trg_mask
 
