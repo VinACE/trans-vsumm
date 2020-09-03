@@ -440,7 +440,7 @@ class Seq2Seq(nn.Module):
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
         if type(trg)!= 'int':
-            # print(f'***** {trg}')
+            print(f'***** {trg}')
             # print(f'***** {trg.shape}')
             # print(f'{self.trg_pad_idx}')
             # # if torch.is_tensor(trg_pad_mask):
