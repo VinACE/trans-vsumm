@@ -440,7 +440,8 @@ class Seq2Seq(nn.Module):
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
         if isinstance(trg, int):
-            trg_len = trg
+            # trg_len = trg
+            trg_len = 128
             trg_sub_mask = torch.tril(torch.ones((trg_len, trg_len), device = self.device)).bool()
             trg_mask = trg_sub_mask
 
