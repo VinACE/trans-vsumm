@@ -285,6 +285,11 @@ class AONet:
                 print(f'type of seq is {type(seq)}')
                 seq = torch.from_numpy(seq).unsqueeze(0)
 
+                print("+++++++++++++++++++++++++++++++++++++++++++++++++**********************")
+                print(seq.numel())
+                print("+++++++++++++++++++++++++++++++++++++++++++++++++**********************")
+                
+
                 print(f'shape of seq after unsequeeze {seq.shape}') # TODO remove the prints for shape
                 # print(f'size of seq afterunsequeeze {seq.size()}')
                 print(f'type of seq after is {type(seq)}')
