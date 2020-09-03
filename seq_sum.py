@@ -439,7 +439,7 @@ class Seq2Seq(nn.Module):
         #trg = [batch size, trg len]
         print(f"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&(((((((((((((((((((((((((((((((((((^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 
-        if type(trg)!= 'int'
+        if type(trg)!= 'int':
             # print(f'***** {trg}')
             # print(f'***** {trg.shape}')
             # print(f'{self.trg_pad_idx}')
