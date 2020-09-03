@@ -333,29 +333,29 @@ class AONet:
                 # TODO: normalize the target frame features. according to the scores..
                 # if torch.is_tensor(seq) and torch.is_tensor(trg) and (seq.numel() > 2) and (trg.numel() > 2):
 
-                if type(seq) is int and type(seq) is int:
+            # if type(seq) is int and type(seq) is int:
 
-                    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^Tensor Block................")                     
-                    y, _ = self.model(seq, trg)  ## TODO  look how they are training the seq2seq model....
-                    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^Tensor Block................end")
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^Tensor Block................")                     
+                y, _ = self.model(seq, trg)  ## TODO  look how they are training the seq2seq model....
+                print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^Tensor Block................end")
 
-                    print(type(y))
-                    print(f'shape of y is {y.shape}')
-                    print(f'shape of target is {target.shape}')
-                    print(f'target is {target}')
-                    print(f'y is {y}')
+                print(type(y))
+                print(f'shape of y is {y.shape}')
+                print(f'shape of target is {target.shape}')
+                print(f'target is {target}')
+                print(f'y is {y}')
 
-                    loss_att = 0
+                loss_att = 0
 
-                    loss = criterion(y, target)
-                    # loss2 = y.sum()/seq_len
-                    loss = loss + loss_att
-                    self.optimizer.zero_grad()
-                    loss.backward()
-                    self.optimizer.step()
-                    avg_loss.append([float(loss), float(loss_att)])
-                else:
-                    pass
+                loss = criterion(y, target)
+                # loss2 = y.sum()/seq_len
+                loss = loss + loss_att
+                self.optimizer.zero_grad()
+                loss.backward()
+                self.optimizer.step()
+                avg_loss.append([float(loss), float(loss_att)])
+            # else:
+            #     pass
 
             # Evaluate test dataset
             val_fscore, video_scores = self.eval(self.test_keys)
